@@ -1,5 +1,6 @@
 :root {
     --main-color: #F28E1C;
+    --main-color-highlighted: #ffffff36;
 
     --mainContentMaxWidth: 900px;
     --contentGridSquareWidth: 150px;
@@ -7,8 +8,7 @@
     --padding-amount: 1em;
 
     --navigationBarHeight: 4.5em;
-
-    --transitionDuration: 200ms;
+    --transition-time: .2s;
 }
 
 body {
@@ -27,6 +27,69 @@ body {
 .leftPanel {
     background-color: var(--main-color);
     color: white;
+}
+
+.leftPanelHeader {
+    display: flex;
+    justify-content: center;
+}
+
+/*
+MENU ROWS
+*/
+
+.menuRow img, .menuRowHeader img {
+    width: 24px;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(195deg) brightness(108%) contrast(104%);
+}
+
+.menuRowHeader img {
+    width: 36px;
+}
+
+.menuRow {
+    height: 60px;
+}
+
+.menuRow, .menuRowHeader {
+    background-color: var(--main-color);
+    transition: var(--transition-time);
+
+    border-left: 0.3em solid transparent
+}
+
+.menuRow:hover, .menuRowHeader:hover {
+    /*background-color: #4b4e5a;*/
+    background-color: var(--main-color-highlighted);
+    transition: var(--transition-time);
+
+    border-left: 0.3em solid #ffffff;
+    overflow: hidden;   
+}
+
+#noHighlight:hover  {
+    background-color: var(--main-color);
+    border-left: 0.3em solid transparent
+}
+
+.menuRowContents {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+
+    padding: 0 0.7em;
+}
+
+.menuRowHeader {
+    display: flex;
+    justify-content: center;
+    grid-template-columns: 54px 1fr;
+}
+
+.menuRowHeaderContents {
+    display: flex;
+    gap: 0.5em;
+    padding-right: 1em;
 }
 
 .topBanner {
