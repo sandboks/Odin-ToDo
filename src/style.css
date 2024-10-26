@@ -5,7 +5,19 @@
     --mainContentMaxWidth: 900px;
     --contentGridSquareWidth: 150px;
     --menuGridSquareWidth: 220px;
-    --padding-amount: 1em;
+
+    --main-color-selection: #ffffff36;
+    --main-color-projects: #e3e8ee;
+    --main-color-light: rgb(238, 238, 238);
+
+    --bg-darkmode: #3a3f47;
+    --bg-darkmode2: #2b2d30;
+
+    --font-color-softer: #6c6c6c;
+    --font-color-softer-dark: #cecdcd;
+
+    --padding-amount: 2em;
+    --border-radius: 1em;
 
     --navigationBarHeight: 4.5em;
     --transition-time: .2s;
@@ -98,3 +110,163 @@ MENU ROWS
     justify-content: center;
     padding: 1em;
 }
+
+/*
+TOP BANNER
+*/
+
+.topBanner {
+    display: grid;
+    /*
+    background-color: white;
+    color: black;
+    */
+}
+
+.topBannerHeader, .topBannerMain {
+    display: grid;
+    /* grid-auto-columns: auto; 
+    grid-column: 1fr 1fr; */
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.topBannerAlerts {
+    display: grid;
+    grid-template: 1fr / repeat(4, auto);
+    justify-content: end;
+    align-items: center;
+    gap: 1em;
+    padding-right: var(--padding-amount);
+}
+
+.topBannerSearch {
+    display: grid;
+    grid-template: 1fr / auto 1fr;
+    /*grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));*/
+    grid-template-rows: repeat(1fr, minmax(150px, 1fr));
+
+    justify-content: start;
+    align-items: center;
+    gap: 1em;
+    padding-left: var(--padding-amount);
+}
+
+input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+
+    border-radius: var(--border-radius);
+    background-color: var(--main-color-light);
+    padding-left: 1em;
+    margin: 0;
+}
+
+.topBannerHeaderDark input[type=text] {
+    background-color: var(--bg-darkmode2);
+    color: var(--font-color-softer-dark);
+}
+
+.topBannerMainLeft {
+    display: grid;
+    grid-template: 1fr / auto auto;
+    justify-content: start;
+    padding-left: var(--padding-amount);
+    gap: 1em;
+}
+
+.topBannerMainLeft img {
+
+    height: 80px;
+    border-radius: 50%;
+}
+
+.topBannerMainLeft p, .topBannerMainLeft h2 {
+    margin: 0;
+}
+
+.avatarAlertSection, .avatarAlertSectionSmall {
+    width: 40px;
+    border-radius: 50%;
+}
+
+.avatarAlertSectionSmall {
+    width: 24px;
+}
+
+.topBannerMainLeftUsername {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topBannerMainRight {
+    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    justify-items: end;
+    gap: 1em;
+    padding: 0 1em;
+}
+
+.controlsRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+
+    border-radius: 20px;
+    padding: 6px;
+    /*
+    background-color: var(--main-color-projects);
+    */
+}
+
+.darkModeContainer {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: var(--main-color-light);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.darkModeContainerDark {
+    background-color: var(--bg-darkmode2);
+}
+
+.colorPickWrapper {
+    height: 2em;
+    width: 2em;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.colorPickWrapper  input[type=color] {
+    position: absolute;
+    height: 4em;
+    width: 4em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+}
+
