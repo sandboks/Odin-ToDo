@@ -2,6 +2,9 @@
     --main-color: #F28E1C;
     --main-color-highlighted: #ffffff36;
 
+    --colorOffWhite: #f1f1f1;
+    --colorSlightGray: #e4e4e4;
+
     --mainContentMaxWidth: 900px;
     --contentGridSquareWidth: 150px;
     --menuGridSquareWidth: 220px;
@@ -139,6 +142,7 @@ TOP BANNER
     align-items: center;
     gap: 1em;
     padding-right: var(--padding-amount);
+    text-align: center;
 }
 
 .topBannerSearch {
@@ -268,5 +272,73 @@ input[type=text] {
     padding: 0;
 
     cursor: pointer;
+}
+
+/*
+RIGHT SIDE CONTENT
+*/
+
+.centerContent {
+    padding: 1em;
+}
+
+.categoryBanner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--colorSlightGray);
+    border-radius: 1em 1em 0 0;
+    overflow: hidden;
+    padding: 1em 2em;
+}
+
+#newTaskButton {
+    padding: 0.25em;
+    border-radius: 2em;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+
+    font-size: xx-large;
+    border: none;
+    background: none;
+    color: grey;
+    border: 4px solid grey;
+}
+
+.taskRow {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 1em;
+    padding: 1em 2em;
+    background-color: var(--colorOffWhite);
+    align-items: center;
+}
+
+input[type="checkbox" i] {
+    aspect-ratio: 1 / 1;
+    /* width: 18px; */
+    height: 100%;
+    margin: 0;
+}
+
+.taskTitle {
+    flex-grow: 1;
+}
+
+.priorityColor {
+    background: red;
+    aspect-ratio: 1 / 1;
+    height: 1em;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.dueDateSection {
+    width: 4.5em;
+    text-align: right;
 }
 
