@@ -3,6 +3,7 @@
     --main-color-highlighted: #ffffff36;
 
     --colorOffWhite: #f1f1f1;
+    --colorOffWhite2: #fafafa;
     --colorSlightGray: #e4e4e4;
 
     --mainContentMaxWidth: 900px;
@@ -282,6 +283,14 @@ RIGHT SIDE CONTENT
     padding: 1em;
 }
 
+/*
+Extra div that gives rounded corners to the bottom of the entire section
+*/
+.centerContentRounded {
+    border-radius: 0 0 1em 1em;
+    overflow: hidden;
+}
+
 .categoryBanner {
     display: flex;
     justify-content: space-between;
@@ -307,6 +316,12 @@ RIGHT SIDE CONTENT
     background: none;
     color: grey;
     border: 4px solid grey;
+
+    cursor: pointer;
+}
+
+#newTaskButton:hover {
+    background: black;
 }
 
 .taskRow {
@@ -316,6 +331,18 @@ RIGHT SIDE CONTENT
     padding: 1em 2em;
     background-color: var(--colorOffWhite);
     align-items: center;
+
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.taskRow:hover {
+    background-color: var(--colorOffWhite2);
+}
+
+.taskRow.is-draggable {
+    cursor: grabbing;
 }
 
 input[type="checkbox" i] {
