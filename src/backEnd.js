@@ -8,7 +8,7 @@ https://tahazsh.com/blog/seamless-ui-with-js-drag-to-reorder-example/
 export const BackEnd = (function () {
     let pointerStartX = 0;
     let pointerStartY = 0;
-    let draggableItem;
+    let clickableItem;
 
     let isDragging = false;
 
@@ -50,8 +50,8 @@ export const BackEnd = (function () {
     function click(e) {
         console.log("click");
 
-        draggableItem = e.target.closest('.taskRow')
-        if (!draggableItem) return
+        clickableItem = e.target.closest('.taskRow')
+        if (!clickableItem) return
 
         InitDraggableItem()
         InitItemsState();
@@ -64,32 +64,14 @@ export const BackEnd = (function () {
         document.addEventListener('touchmove', mouseMove, { passive: false });
     }
 
-
-    function dragStart(e) {
-        console.log('Drag Start')
-
-        draggableItem = e.target.closest('.taskRow')
-        if (!draggableItem) return
-
-        InitDraggableItem()
-        InitItemsState();
-        DisablePageScroll();
-
-        pointerStartX = e.clientX || e.touches[0].clientX
-        pointerStartY = e.clientY || e.touches[0].clientY
-    
-        document.addEventListener('mousemove', drag)
-        document.addEventListener('touchmove', drag, { passive: false });
-    }
-
     function InitDraggableItem() {
         //draggableItem.classList.remove('is-idle')
-        draggableItem.classList.add('is-draggable')
+        clickableItem.classList.add('is-draggable')
     }
 
     function InitItemsState() {
         GetIdleItems().forEach((item, i) => {
-          if (GetAllItems().indexOf(draggableItem) > i) {
+          if (GetAllItems().indexOf(clickableItem) > i) {
             item.dataset.isAbove = ''
           }
         })
@@ -110,29 +92,13 @@ export const BackEnd = (function () {
         }
 
         if (isDragging) {
-            draggableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px)`
+            clickableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px) rotate(2deg)`
             UpdateIdleItemsStateAndPosition();
         }
-
-    }
-    
-    function drag(e) {
-        console.log('Dragging')
-
-        e.preventDefault(); //make it work on iPhone
-
-        const currentPositionX = e.clientX || e.touches[0].clientX
-        const currentPositionY = e.clientY || e.touches[0].clientY
-
-        const pointerOffsetX = currentPositionX - pointerStartX
-        const pointerOffsetY = currentPositionY - pointerStartY
-
-        draggableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px)`
-        UpdateIdleItemsStateAndPosition();
     }
 
     function UpdateIdleItemsStateAndPosition() {
-        const draggableItemRect = draggableItem.getBoundingClientRect()
+        const draggableItemRect = clickableItem.getBoundingClientRect()
         const draggableItemY = draggableItemRect.top + (draggableItemRect.height / 2)
         const ITEMS_GAP = 0 //10
       
@@ -181,6 +147,8 @@ export const BackEnd = (function () {
             dragEnd();
         }
         else {
+            if (!clickableItem)
+                return;
             console.log("CLICKED ON OBJECT");
             cleanup();
         }
@@ -207,10 +175,10 @@ export const BackEnd = (function () {
     }
 
     function unsetDraggableItem() {
-        draggableItem.style = null
-        draggableItem.classList.remove('is-draggable')
-        draggableItem.classList.add('is-idle')
-        draggableItem = null
+        clickableItem.style = null
+        clickableItem.classList.remove('is-draggable')
+        clickableItem.classList.add('is-idle')
+        clickableItem = null
     }
 
     function unsetItemState() {
@@ -225,7 +193,7 @@ export const BackEnd = (function () {
         const reorderedItems = []
       
         GetAllItems().forEach((item, index) => {
-            if (item === draggableItem) {
+            if (item === clickableItem) {
                 return
             }
             if (!isItemToggled(item)) {
@@ -239,7 +207,7 @@ export const BackEnd = (function () {
         for (let index = 0; index < GetAllItems().length; index++) {
             const item = reorderedItems[index]
             if (typeof item === 'undefined') {
-                reorderedItems[index] = draggableItem
+                reorderedItems[index] = clickableItem
             }
         }
       
