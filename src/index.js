@@ -9,6 +9,8 @@ let allTasks = [];
 const tasksHardcoded = [
     ["Task #1", "Description goes here", "2019", 0],
     ["Task #2", "Description goes here", "1984", 0],
+    ["Task #3", "Get draggable items working!!1", "2024", 0],
+    ["Task #4", "Get draggable items working!!1", "1683", 0],
 ];
 
 for (let i = 0; i < tasksHardcoded.length; i++) {

@@ -335,6 +335,8 @@ Extra div that gives rounded corners to the bottom of the entire section
     cursor: pointer;
     user-select: none;
     box-sizing: border-box;
+
+    transition: 50ms;
 }
 
 .taskRow:hover {
@@ -343,6 +345,8 @@ Extra div that gives rounded corners to the bottom of the entire section
 
 .taskRow.is-draggable {
     cursor: grabbing;
+    z-index: 3;
+    position: relative;
 }
 
 input[type="checkbox" i] {

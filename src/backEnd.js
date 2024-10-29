@@ -1,3 +1,8 @@
+/*
+large parts of the drag and drop functionality were borrowed from here:
+https://tahazsh.com/blog/seamless-ui-with-js-drag-to-reorder-example/
+*/
+
 
 
 export const BackEnd = (function () {
@@ -9,7 +14,22 @@ export const BackEnd = (function () {
     function AddRowListeners(newRow) {
         newRow.addEventListener('mousedown', dragStart);
         document.addEventListener('mouseup', dragEnd);
+        
+        newRow.addEventListener('touchstart', dragStart)
+        document.addEventListener('touchend', dragEnd)
     }
+
+    function DisablePageScroll() {
+        document.body.style.overflow = 'hidden'
+        document.body.style.touchAction = 'none'
+        document.body.style.userSelect = 'none'
+      }
+      
+      function EnablePageScroll() {
+        document.body.style.overflow = ''
+        document.body.style.touchAction = ''
+        document.body.style.userSelect = ''
+      }
 
     let items = []
 
@@ -34,11 +54,13 @@ export const BackEnd = (function () {
 
         InitDraggableItem()
         InitItemsState();
+        DisablePageScroll();
 
-        pointerStartX = e.clientX;
-        pointerStartY = e.clientY;
+        pointerStartX = e.clientX || e.touches[0].clientX
+        pointerStartY = e.clientY || e.touches[0].clientY
     
         document.addEventListener('mousemove', drag)
+        document.addEventListener('touchmove', drag, { passive: false });
     }
 
     function InitDraggableItem() {
@@ -57,8 +79,10 @@ export const BackEnd = (function () {
     function drag(e) {
         console.log('Dragging')
 
-        const currentPositionX = e.clientX
-        const currentPositionY = e.clientY
+        e.preventDefault(); //make it work on iPhone
+
+        const currentPositionX = e.clientX || e.touches[0].clientX
+        const currentPositionY = e.clientY || e.touches[0].clientY
 
         const pointerOffsetX = currentPositionX - pointerStartX
         const pointerOffsetY = currentPositionY - pointerStartY
@@ -116,21 +140,61 @@ export const BackEnd = (function () {
         if (!draggableItem) return
         console.log('Drag end')
 
+        ApplyNewItemsOrder();
         cleanup();
     }
 
     function cleanup() {
+        items = [];
         unsetDraggableItem()
+        unsetItemState();
+        EnablePageScroll();
       
         document.removeEventListener('mousemove', drag)
-      }
+        document.removeEventListener('touchmove', drag);
+    }
 
     function unsetDraggableItem() {
         draggableItem.style = null
         draggableItem.classList.remove('is-draggable')
         draggableItem.classList.add('is-idle')
         draggableItem = null
+    }
+
+    function unsetItemState() {
+        GetIdleItems().forEach((item, i) => {
+          delete item.dataset.isAbove
+          delete item.dataset.isToggled
+          item.style.transform = ''
+        })
       }
+
+    function ApplyNewItemsOrder() {
+        const reorderedItems = []
+      
+        GetAllItems().forEach((item, index) => {
+            if (item === draggableItem) {
+                return
+            }
+            if (!isItemToggled(item)) {
+                reorderedItems[index] = item
+                return
+            }
+            const newIndex = isItemAbove(item) ? index + 1 : index - 1
+            reorderedItems[newIndex] = item
+        })
+      
+        for (let index = 0; index < GetAllItems().length; index++) {
+            const item = reorderedItems[index]
+            if (typeof item === 'undefined') {
+                reorderedItems[index] = draggableItem
+            }
+        }
+      
+        reorderedItems.forEach((item) => {
+            document.querySelector(".tasksContainer").appendChild(item)
+        })
+    }
 
     return {
         AddRowListeners,
