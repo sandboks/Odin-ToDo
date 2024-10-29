@@ -10,13 +10,15 @@ export const BackEnd = (function () {
     let pointerStartY = 0;
     let draggableItem;
 
+    let isDragging = false;
+
 
     function AddRowListeners(newRow) {
-        newRow.addEventListener('mousedown', dragStart);
-        document.addEventListener('mouseup', dragEnd);
+        newRow.addEventListener('mousedown', click);
+        document.addEventListener('mouseup', mouseUp);
         
-        newRow.addEventListener('touchstart', dragStart)
-        document.addEventListener('touchend', dragEnd)
+        newRow.addEventListener('touchstart', click)
+        document.addEventListener('touchend', mouseUp)
     }
 
     function DisablePageScroll() {
@@ -43,6 +45,23 @@ export const BackEnd = (function () {
     function GetIdleItems() {
         //return getAllItems().filter((item) => item.classList.contains('is-idle'))
         return GetAllItems().filter((item) => !item.classList.contains('is-draggable'))
+    }
+
+    function click(e) {
+        console.log("click");
+
+        draggableItem = e.target.closest('.taskRow')
+        if (!draggableItem) return
+
+        InitDraggableItem()
+        InitItemsState();
+        DisablePageScroll();
+
+        pointerStartX = e.clientX || e.touches[0].clientX
+        pointerStartY = e.clientY || e.touches[0].clientY
+    
+        document.addEventListener('mousemove', mouseMove)
+        document.addEventListener('touchmove', mouseMove, { passive: false });
     }
 
 
@@ -74,7 +93,28 @@ export const BackEnd = (function () {
             item.dataset.isAbove = ''
           }
         })
-      }
+    }
+
+    function mouseMove(e) {
+        e.preventDefault(); //make it work on iPhone
+
+        const currentPositionX = e.clientX || e.touches[0].clientX
+        const currentPositionY = e.clientY || e.touches[0].clientY
+
+        const pointerOffsetX = currentPositionX - pointerStartX
+        const pointerOffsetY = currentPositionY - pointerStartY
+
+        if (!isDragging && Math.sqrt(Math.pow(pointerOffsetX, 2) + Math.pow(pointerOffsetY, 2)) > 10) {
+            console.log("IS DRAGGING");
+            isDragging = true;
+        }
+
+        if (isDragging) {
+            draggableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px)`
+            UpdateIdleItemsStateAndPosition();
+        }
+
+    }
     
     function drag(e) {
         console.log('Dragging')
@@ -93,21 +133,21 @@ export const BackEnd = (function () {
 
     function UpdateIdleItemsStateAndPosition() {
         const draggableItemRect = draggableItem.getBoundingClientRect()
-        const draggableItemY = draggableItemRect.top + draggableItemRect.height / 2
+        const draggableItemY = draggableItemRect.top + (draggableItemRect.height / 2)
         const ITEMS_GAP = 0 //10
       
         // Update state
         GetIdleItems().forEach((item) => {
           const itemRect = item.getBoundingClientRect()
-          const itemY = itemRect.top + itemRect.height / 2
+          const itemY = itemRect.top + (itemRect.height / 2)
           if (isItemAbove(item)) {
-            if (draggableItemY <= itemY) {
+            if (draggableItemY <= itemY) { //<= itemY + (itemRect.height / 4)
               item.dataset.isToggled = ''
             } else {
               delete item.dataset.isToggled
             }
           } else {
-            if (draggableItemY >= itemY) {
+            if (draggableItemY>= itemY) {
               item.dataset.isToggled = ''
             } else {
               delete item.dataset.isToggled
@@ -128,17 +168,29 @@ export const BackEnd = (function () {
         })
       }
       
-      function isItemAbove(item) {
+    function isItemAbove(item) {
         return item.hasAttribute('data-is-above')
-      }
-      
-      function isItemToggled(item) {
+    }
+    
+    function isItemToggled(item) {
         return item.hasAttribute('data-is-toggled')
-      }
+    }
+
+    function mouseUp() {
+        if (isDragging) {
+            dragEnd();
+        }
+        else {
+            console.log("CLICKED ON OBJECT");
+            cleanup();
+        }
+    }
     
     function dragEnd() {
-        if (!draggableItem) return
+        
+        //if (!draggableItem) return
         console.log('Drag end')
+        isDragging = false;
 
         ApplyNewItemsOrder();
         cleanup();
@@ -150,8 +202,8 @@ export const BackEnd = (function () {
         unsetItemState();
         EnablePageScroll();
       
-        document.removeEventListener('mousemove', drag)
-        document.removeEventListener('touchmove', drag);
+        document.removeEventListener('mousemove', mouseMove)
+        document.removeEventListener('touchmove', mouseMove);
     }
 
     function unsetDraggableItem() {
