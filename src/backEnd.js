@@ -92,7 +92,7 @@ export const BackEnd = (function () {
         }
 
         if (isDragging) {
-            clickableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px) rotate(2deg)`
+            clickableItem.style.transform = `translate(${pointerOffsetX}px, ${pointerOffsetY}px)` //  rotate(2deg)
             UpdateIdleItemsStateAndPosition();
         }
     }

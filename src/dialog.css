@@ -1,0 +1,134 @@
+/* MODAL DIALOG */
+
+dialog {
+    border: none !important;
+    border-radius: 1em;
+    padding: 1.5em;
+}
+
+dialog {
+    border: none !important;
+    border-radius: 1em;
+    padding: 1.5em;
+    overflow: visible;
+}
+
+dialog:-internal-dialog-in-top-layer::backdrop {
+    position: fixed;
+    inset: 0px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.formInputSection {
+    gap: 1em;
+    display: flex;
+    flex-direction: column;;
+}
+
+label {
+    min-width: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form div {
+    display: flex;
+    flex-basis: 100%;
+}
+
+.SideBySide {
+    gap: 1em;
+}
+
+input[type="text" i], input[type="number" i] { /*[type=text]*/
+    float: right;
+    padding: 1em;
+    border: none;
+    font-size: 17px;
+
+    border-radius: calc(var(--border-radius)/2);
+    background-color: var(--main-color-light);
+    padding-left: 1em;
+
+    width: 100%;
+}
+
+#dialogHeaderText {
+    text-align: center;
+    margin: 0;
+}
+
+.addNewBookDialogDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.addNewBookDialogDiv button {
+    width: 60%;
+    padding-top: 1em;
+}
+
+.buttonImage {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.closeButtonDiv {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    aspect-ratio: 1 / 1;
+    width: 2em;
+    /* height: 2em; */
+}
+
+.closeButtonDiv button {
+        /* position: absolute; */
+    /* top: 0.5em; */
+    /* right: 0.5em; */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-width: 0;
+    font-size: x-large;
+    transform: rotate(45deg);
+    text-align: center;
+    /* padding: 2.5em; */
+    padding: 0;
+    /* aspect-ratio: 1 / 1; */
+    /* width: 2em;*/
+
+    cursor: pointer;
+}
+
+dialog textarea {
+    width: 100%;
+    height: 10em;
+    padding: 1em;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+#dialogSaveButton {
+    padding: 12px 24px;
+    border-radius: 1.5em;
+    border: 0px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--main-color);
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    width: 60%;
+    height: 3em;
+    transition: var(--transition-time);
+    cursor: pointer;
+}

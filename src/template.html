@@ -6,6 +6,52 @@
     <title>Odin To-Do</title>
 </head>
 <body>
+    <!--
+    DIALOGUE
+    -->
+    <dialog id="addNewBookDialog">
+        <div class="closeButtonDiv">
+            <!--
+            <img src="img/close-circle-outline.svg" id="panelCloseButton" class="buttonImage">
+            -->
+            <button id="panelCloseButton">
+                <span>+</span>
+            </button>
+        </div>
+        <div class="addNewBookDialogDiv">
+            <h1 id="dialogHeaderText">Edit</h1>
+            <form method="dialog" id="addNewBookForm">
+                <div class="formInputSection">
+                    <div>
+                        <input type="text" name="title" placeholder="Title">
+                    </div>
+
+                    <div class="SideBySide">
+                        <label for="priority">Priority:</label>
+                        <select name="priority" id="priority">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low" selected="selected">Low</option>
+                        </select>
+                        <div> 
+                            <label for="dateField">Date:</label>
+                            <input type="date" id="dateField">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea name="description" placeholder="Description"></textarea>
+                        <!--
+                        <input type="text" name="description" placeholder="Description">
+                        -->  
+                    </div>
+                </div>
+            </form>
+            <button id="dialogSaveButton">Save changes</button>
+        </div>
+    </dialog>
+    <!--
+    CONTENT
+    -->
     <div class="contentGrid">
         <div class="leftPanel">
             <div class="leftPanelHeader">
@@ -24,7 +70,7 @@
             <div class="topBannerHeader">
                 <div class="topBannerSearch">
                     <img src="img/magnify.svg" class="avatarAlertSectionSmall">
-                    <input type="text" placeholder="Search...">
+                    <input type="text" placeholder="Search" id="searchbar">
                 </div>
                 <div class="topBannerAlerts">
                     <div class="controlsRow">

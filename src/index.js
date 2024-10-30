@@ -1,4 +1,5 @@
 import "./style.css";
+import "./dialog.css";
 // all major functions are stored in these objects
 import Task from "./task.js";
 import {FrontEnd} from "./frontEnd.js" //, domManipulator, notesManager
@@ -18,5 +19,20 @@ for (let i = 0; i < tasksHardcoded.length; i++) {
     let t = new Task(data[0], data[1], data[2], data[3]);
     allTasks.push(t);
     FrontEnd.AppendNewTask(t);
+}
+
+const createDialog = document.getElementById("addNewBookDialog");
+const closeButton = document.getElementById("panelCloseButton");
+
+createDialog.showModal();
+
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+    CloseDialog();
+});
+  
+function CloseDialog() {
+    //bookCurrentlyEditing = null;
+    createDialog.close();
 }
 

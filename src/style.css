@@ -158,7 +158,7 @@ TOP BANNER
     padding-left: var(--padding-amount);
 }
 
-input[type=text] {
+input[type=text]#searchbar  {
     float: right;
     padding: 6px;
     border: none;
@@ -345,7 +345,7 @@ Extra div that gives rounded corners to the bottom of the entire section
 
 .taskRow.is-draggable {
     cursor: grabbing;
-    z-index: 3;
+    z-index: 1;
     position: relative;
 }
 
