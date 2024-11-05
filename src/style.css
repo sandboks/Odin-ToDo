@@ -279,19 +279,26 @@ input[type=text]#searchbar  {
 RIGHT SIDE CONTENT
 */
 
-.centerContent {
-    padding: 1em;
+.tasksContainer {
+    gap: 2em;
+    display: grid;
+    margin: 2em;
+}
+
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 /*
 Extra div that gives rounded corners to the bottom of the entire section
 */
-.centerContentRounded {
+.TaskContainerRounded {
     border-radius: 0 0 1em 1em;
     overflow: hidden;
 }
 
-.categoryBanner {
+.taskBanner {
     display: flex;
     justify-content: space-between;
     align-items: center;

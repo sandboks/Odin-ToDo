@@ -1,26 +1,38 @@
 import "./style.css";
 import "./dialog.css";
 // all major functions are stored in these objects
-import Task from "./task.js";
-import {FrontEnd} from "./frontEnd.js" //, domManipulator, notesManager
+import { Task, Step } from "./task.js";
+import { FrontEnd } from "./frontEnd.js" //, domManipulator, notesManager
 
-let allTasks = [];
-
+//let allTasks = [];
 
 const tasksHardcoded = [
     ["Task #1", "Description goes here", "2019", 0],
     ["Task #2", "Description goes here", "1984", 0],
-    ["Task #3", "Get draggable items working!!1", "2024", 0],
-    ["Task #4", "Get draggable items working!!1", "1683", 0],
+];
+const stepsHardcoded = [
+    ["Step #1"],
+    ["Step #2"],
+    ["Step #3"],
+    ["Step #4"],
 ];
 
 for (let i = 0; i < tasksHardcoded.length; i++) {
     let data = tasksHardcoded[i];
     let t = new Task(data[0], data[1], data[2], data[3]);
-    allTasks.push(t);
-    FrontEnd.AppendNewTask(t);
+    //allTasks.push(t);
+    FrontEnd.AppendNewTaskWithSteps(t, stepsHardcoded);
 }
 
+for (let i = 0; i < stepsHardcoded.length; i++) {
+    let data = stepsHardcoded[i];
+    let s = new Step(data[0]);
+    //FrontEnd.
+    //allTasks[0].AppendStep(s);
+}
+
+
+/*
 const createDialog = document.getElementById("addNewBookDialog");
 const closeButton = document.getElementById("panelCloseButton");
 
@@ -35,4 +47,5 @@ function CloseDialog() {
     //bookCurrentlyEditing = null;
     createDialog.close();
 }
+*/
 

@@ -5,7 +5,7 @@ https://tahazsh.com/blog/seamless-ui-with-js-drag-to-reorder-example/
 
 
 
-export const BackEnd = (function () {
+export const DragDrop = (function () {
     let pointerStartX = 0;
     let pointerStartY = 0;
     let clickableItem;
