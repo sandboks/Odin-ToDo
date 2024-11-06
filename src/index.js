@@ -31,6 +31,8 @@ for (let i = 0; i < stepsHardcoded.length; i++) {
     //allTasks[0].AppendStep(s);
 }
 
+FrontEnd.AddEventListeners();
+
 
 /*
 const createDialog = document.getElementById("addNewBookDialog");

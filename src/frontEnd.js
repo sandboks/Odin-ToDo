@@ -16,6 +16,13 @@ export const FrontEnd = (function () {
     let taskRows = [];
     let taskCount = 0;
 
+    function AddEventListeners() {
+        document.addEventListener("keypress", function(event){
+            var x = event.key;
+            ProcessInput(x);
+        });
+    }
+
     function AppendNewTask(t) {
         let newTask = CreateNewTask(t);
         taskRows.push(t);
@@ -30,27 +37,23 @@ export const FrontEnd = (function () {
         AppendNewTask(t);
 
         for (let i = 0; i < stepsArray.length; i++) {
-            let step = new Step(stepsArray[i]);
+            let step = t.GenerateNewStep(stepsArray[i], false);
             AddNewStep(t, step);
         }
-    }
-
-    function AppendNewStep(t) {
-        let newRow = CreateNewStepRow(t);
-        //taskRows.push(newRow);
-
-        //DragDrop.AddRowListeners(newRow);
     }
 
     function CreateNewTask(t) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
             let taskBanner = AppendDivWithClasses(newTask, ["taskBanner"]);
                 let bannerText = AppendTag(taskBanner, "h2", t.title, []);
-                let newTaskButton = AppendTag(taskBanner, "button", "+", []);
-                    newTaskButton.id = "newTaskButton";
+                    bannerText.setAttribute("contenteditable", "true");
+                let newTaskButtonDiv = AppendDivWithClasses(taskBanner, []);
+                    let newTaskButton = AppendTag(newTaskButtonDiv, "button", "+", []);
+                        newTaskButton.id = "newTaskButton";
             let stepsContainer = AppendDivWithClasses(newTask, ["stepsContainer"]);
 
         t.HTMLroot = newTask;
+        console.log(t.HTMLroot);
         t.stepsRoot = stepsContainer;
         console.log(t.stepsRoot);
 
@@ -67,19 +70,35 @@ export const FrontEnd = (function () {
     }
 
     function AddNewStep(task, step = null) {
-        let newRow = AppendDivWithClasses(task.stepsRoot, ["taskRow"]);
-
+        let manuallyAddedTask = (step == null);
         if (step == null) {
-            step = new Step("UNDEFINED");
+            step = task.GenerateNewStep("");
         }
-        
-        const checkBox = document.createElement('input');
-        checkBox.type = "checkbox";
-        checkBox.id = "c1"; // TODO
-        checkBox.checked = step.completed;
-        newRow.appendChild(checkBox);
 
-        const taskTitle = AppendTag(newRow, "span", step.title, ["taskTitle"]);
+
+        let newRow = AppendDivWithClasses(task.stepsRoot, ["stepRow"]);
+        newRow.id = step.id;
+        
+            const checkBox = document.createElement('input');
+            checkBox.type = "checkbox";
+            checkBox.id = "c1"; // TODO
+            checkBox.checked = step.completed;
+            newRow.appendChild(checkBox);
+
+            const stepTitle = AppendTag(newRow, "span", step.title, ["stepTitle"]);
+            stepTitle.setAttribute("contenteditable", "true");
+            stepTitle.setAttribute("maxlength", 64);
+            if (manuallyAddedTask)
+                stepTitle.focus();
+
+            const closeButtonDiv = AppendDivWithClasses(newRow, ["rowCloseButtonDiv"]);
+                let deleteStepButton = AppendTag(closeButtonDiv, "button", "x", []);
+                deleteStepButton.addEventListener("click", () => {
+                    DeleteStep(task, step);
+                });
+
+
+        //task.AppendStep(step);
 
         //const priority = AppendDivWithClasses(newRow, ["priorityColor"]);
 
@@ -89,8 +108,20 @@ export const FrontEnd = (function () {
         return newRow;
     }
 
+    function DeleteStep(task, step) {
+        //let stepRoot = task.stepsRoot.querySelector("#" + step.id); //[id='1']
+        let stepRoot = task.stepsRoot.querySelector(`[id='${step.id}']`);
+        let stepDeleteButton = stepRoot.querySelector(".rowCloseButtonDiv button");
+        //console.log(stepDeleteButton);
+        //console.log("I probably need to remove listeners here...");
+        // this step clones the button, and in doing so, removes all eventlisteners attached to it
+        stepDeleteButton.replaceWith(stepDeleteButton.cloneNode(true));
+        stepRoot.remove();
+        task.DeleteStep(step);
+    }
+
     function CreateNewStepRow(t) {
-        let newRow = AppendDivWithClasses(StepsContainer, ["taskRow"]);
+        let newRow = AppendDivWithClasses(StepsContainer, ["stepRow"]);
 
         const checkBox = document.createElement('input');
         checkBox.type = "checkbox";
@@ -129,8 +160,30 @@ export const FrontEnd = (function () {
         return tagHTML;
     }
 
+    const specialInputs = ["Enter", "=", "c", ".", "±", "⌫",];
+
+    function ProcessInput(x) {
+        if (specialInputs.includes(x)) {
+            switch (x) {
+                case "Enter":
+                //case "=":
+                    console.log(document.activeElement);
+                    break;
+                case "c":
+                    break;
+                case ".":
+                    break;
+                case "±":
+                    break;
+                case "⌫":
+                    break;
+            }
+        }
+    }
+
     return {
         AppendNewTask,
         AppendNewTaskWithSteps,
+        AddEventListeners,
     };
 })();
