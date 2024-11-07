@@ -7,7 +7,10 @@ import { FrontEnd } from "./frontEnd.js" //, domManipulator, notesManager
 //let allTasks = [];
 
 const tasksHardcoded = [
-    ["Task #1", "Description goes here", "2019", 0],
+    ["Task #1", "Description goes here", "2019", 0, [
+        ["Step #1", true],
+        ["Step #2", false]
+    ]],
     ["Task #2", "Description goes here", "1984", 0],
 ];
 const stepsHardcoded = [
@@ -17,19 +20,7 @@ const stepsHardcoded = [
     ["Step #4"],
 ];
 
-for (let i = 0; i < tasksHardcoded.length; i++) {
-    let data = tasksHardcoded[i];
-    let t = new Task(data[0], data[1], data[2], data[3]);
-    //allTasks.push(t);
-    FrontEnd.AppendNewTaskWithSteps(t, stepsHardcoded);
-}
-
-for (let i = 0; i < stepsHardcoded.length; i++) {
-    let data = stepsHardcoded[i];
-    let s = new Step(data[0]);
-    //FrontEnd.
-    //allTasks[0].AppendStep(s);
-}
+FrontEnd.LoadEntireTask(tasksHardcoded[0]);
 
 FrontEnd.AddEventListeners();
 

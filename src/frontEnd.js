@@ -12,8 +12,9 @@ export const FrontEnd = (function () {
     const StepsContainer = document.querySelector(".stepsContainer");
     const TasksContainer = document.querySelector(".tasksContainer");
     const createDialog = document.getElementById("addNewBookDialog");
+    const NewTaskButton = document.getElementById("NewTaskButton");
 
-    let taskRows = [];
+    let _tasks = [];
     let taskCount = 0;
 
     function AddEventListeners() {
@@ -21,55 +22,68 @@ export const FrontEnd = (function () {
             var x = event.key;
             ProcessInput(x);
         });
+
+        NewTaskButton.addEventListener('click', () => {
+            CreateNewTask();
+            console.log(_tasks);
+        });
     }
 
-    function AppendNewTask(t) {
-        let newTask = CreateNewTask(t);
-        taskRows.push(t);
+    function CreateNewTask(task = null) {
+        let isLoadedFromData = (task != null);
+        if (!isLoadedFromData) {
+            task = new Task("NEW TASK", "", "", 0);
+        }
 
-        console.log("henlo2");
+
+        let newTask = CreateNewTaskHTML(task);
+        _tasks.push(task);
+
+        // we need a task to contain at least one step
+        if (!isLoadedFromData)
+            AddNewStepHTML(task);
+
+        return task;
 
         //DragDrop.AddRowListeners(newRow);
     }
 
-    function AppendNewTaskWithSteps(t, stepsArray) {
-        console.log("henlo");
-        AppendNewTask(t);
+    // take in one big array of data consisting of the raw task input, and an array of steps
+    /* 
+   taskRawData = [title, desc, priority, duedate, [["step1", true], ["step2", false]]];
+    */
+    function LoadEntireTask(tasksRawData) {
+        let task = new Task(tasksRawData[0], tasksRawData[1], tasksRawData[2], tasksRawData[3]);
+        CreateNewTask(task);
 
-        for (let i = 0; i < stepsArray.length; i++) {
-            let step = t.GenerateNewStep(stepsArray[i], false);
-            AddNewStep(t, step);
+        let stepData = tasksRawData[4];
+        for (let i = 0; i < stepData.length; i++) {
+            let step = task.GenerateNewStep(stepData[i][0], stepData[i][1]);
+            AddNewStepHTML(task, step);
         }
     }
 
-    function CreateNewTask(t) {
+    function CreateNewTaskHTML(t) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
             let taskBanner = AppendDivWithClasses(newTask, ["taskBanner"]);
                 let bannerText = AppendTag(taskBanner, "h2", t.title, []);
                     bannerText.setAttribute("contenteditable", "true");
                 let newTaskButtonDiv = AppendDivWithClasses(taskBanner, []);
-                    let newTaskButton = AppendTag(newTaskButtonDiv, "button", "+", []);
-                        newTaskButton.id = "newTaskButton";
+                    let newStepButton = AppendTag(newTaskButtonDiv, "button", "+", []);
+                        newStepButton.id = "newTaskButton";
             let stepsContainer = AppendDivWithClasses(newTask, ["stepsContainer"]);
 
         t.HTMLroot = newTask;
-        console.log(t.HTMLroot);
         t.stepsRoot = stepsContainer;
-        console.log(t.stepsRoot);
 
+        //console.log("add button listeners here");
 
-        console.log("add button listeners here");
-
-        newTaskButton.addEventListener("click", () => {
-            ClickNewTaskButton(t);
+        newStepButton.addEventListener("click", () => {
+            AddNewStepHTML(t);
         });
     }
 
-    function ClickNewTaskButton(t) {
-        AddNewStep(t);
-    }
-
-    function AddNewStep(task, step = null) {
+    function AddNewStepHTML(task, step = null) {
         let manuallyAddedTask = (step == null);
         if (step == null) {
             step = task.GenerateNewStep("");
@@ -109,34 +123,36 @@ export const FrontEnd = (function () {
     }
 
     function DeleteStep(task, step) {
+        if (task.StepCount() == 1) {
+            console.log("LAST STEP. DELETE ERRYTHING");
+            DeleteTask(task);
+            return;
+        }
+        
         //let stepRoot = task.stepsRoot.querySelector("#" + step.id); //[id='1']
         let stepRoot = task.stepsRoot.querySelector(`[id='${step.id}']`);
         let stepDeleteButton = stepRoot.querySelector(".rowCloseButtonDiv button");
         //console.log(stepDeleteButton);
         //console.log("I probably need to remove listeners here...");
+
         // this step clones the button, and in doing so, removes all eventlisteners attached to it
         stepDeleteButton.replaceWith(stepDeleteButton.cloneNode(true));
         stepRoot.remove();
         task.DeleteStep(step);
     }
 
-    function CreateNewStepRow(t) {
-        let newRow = AppendDivWithClasses(StepsContainer, ["stepRow"]);
+    function DeleteTask(task) {
+        let index = _tasks.indexOf(task); 
+        if (index == -1)
+            return;
+        
+        _tasks.splice(index, 1);
+        console.log(_tasks);
 
-        const checkBox = document.createElement('input');
-        checkBox.type = "checkbox";
-        checkBox.id = "c1"; // TODO
-        checkBox.checked = t.completed;
-        newRow.appendChild(checkBox);
 
-        const taskTitle = AppendTag(newRow, "span", t.title, ["taskTitle"]);
-
-        const priority = AppendDivWithClasses(newRow, ["priorityColor"]);
-
-        const dueDateSection = AppendDivWithClasses(newRow, ["dueDateSection"]);
-        const dueDateText = AppendTag(dueDateSection, "span", t.dueDate, []);
-
-        return newRow;
+        let addStepButton = task.HTMLroot.querySelector("#newTaskButton");
+        addStepButton.replaceWith(addStepButton.cloneNode(true));
+        task.HTMLroot.remove();
     }
 
     function AppendDivWithClasses(parentNode, classes) {
@@ -182,8 +198,7 @@ export const FrontEnd = (function () {
     }
 
     return {
-        AppendNewTask,
-        AppendNewTaskWithSteps,
+        LoadEntireTask,
         AddEventListeners,
     };
 })();

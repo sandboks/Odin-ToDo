@@ -3,7 +3,6 @@ title, description, dueDate and priority. You might also want to include notes o
 */
 
 
-
 // Declaration
 export class Task {
     HTMLroot;
@@ -47,6 +46,10 @@ export class Task {
         return false;
     }
 
+    StepCount() {
+        return this._steps.length;
+    }
+
 
 }
 /*
@@ -61,4 +64,16 @@ export class Step {
         this.title = title;
         this.completed = completed;
     }
+}
+
+ // take in one big array of data consisting of the raw task input, and an array of steps
+    /* 
+    categoryData = [
+        [title, desc, priority, duedate, [["step1", true], ["step2", false]]],
+        [title, desc, priority, duedate, [["step1", true]]],
+    ]
+    */
+
+export class CategoryData {
+
 }
