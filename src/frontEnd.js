@@ -43,6 +43,12 @@ export const FrontEnd = (function () {
         if (!isLoadedFromData)
             AddNewStepHTML(task);
 
+
+
+        //ResyncFrontendToData();
+        let myString = JSON.stringify(_tasks, null, 4);
+        console.log(myString);
+
         return task;
 
         //DragDrop.AddRowListeners(newRow);
@@ -52,13 +58,14 @@ export const FrontEnd = (function () {
     /* 
    taskRawData = [title, desc, priority, duedate, [["step1", true], ["step2", false]]];
     */
-    function LoadEntireTask(tasksRawData) {
-        let task = new Task(tasksRawData[0], tasksRawData[1], tasksRawData[2], tasksRawData[3]);
+    function LoadEntireTask(taskJsonData) {
+        let task = new Task(taskJsonData.title, taskJsonData.description, taskJsonData.dueDate, taskJsonData.priority, taskJsonData.id);
         CreateNewTask(task);
 
-        let stepData = tasksRawData[4];
+        let stepData = taskJsonData._steps;
         for (let i = 0; i < stepData.length; i++) {
-            let step = task.GenerateNewStep(stepData[i][0], stepData[i][1]);
+            let step = stepData[i];
+            task.GenerateNewStep(step.title, step.completed);
             AddNewStepHTML(task, step);
         }
     }
@@ -153,6 +160,21 @@ export const FrontEnd = (function () {
         let addStepButton = task.HTMLroot.querySelector("#newTaskButton");
         addStepButton.replaceWith(addStepButton.cloneNode(true));
         task.HTMLroot.remove();
+    }
+
+    function ResyncFrontendToData() {
+        for (let i = 0; i < _tasks.length; i++) {
+            let task = _tasks[i];
+            task.title = task.HTMLroot.querySelector("h2").textContent;
+
+            let stepTitles = task.stepsRoot.querySelectorAll(".stepTitle");
+            let checkboxes = task.stepsRoot.querySelectorAll('input[type="checkbox"]');
+            for (let j = 0; j < task._steps.length; j++) {
+                let step = task._steps[j];
+                step.title = stepTitles[j].textContent;
+                step.completed = checkboxes[j].checked;
+            }
+        }
     }
 
     function AppendDivWithClasses(parentNode, classes) {

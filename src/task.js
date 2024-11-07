@@ -5,12 +5,18 @@ title, description, dueDate and priority. You might also want to include notes o
 
 // Declaration
 export class Task {
-    HTMLroot;
-    stepsRoot;
+    title = "";
+    description = "";
+    dueDate = "";
+    priority = "";
+    id = "";
 
-    completed = false;
     _steps = [];
     _stepsGenerated = 0;
+
+
+    HTMLroot;
+    stepsRoot;
 
     constructor(title, description, dueDate, priority, id = 0) {
         this.title = title;
@@ -27,7 +33,7 @@ export class Task {
         let s = new Step(title, completed);
         s.id = this._stepsGenerated++;
         this._steps.push(s);
-        console.log(this._steps);
+        //console.log(this._steps);
         return s;
     }
 

@@ -11,7 +11,11 @@ const tasksHardcoded = [
         ["Step #1", true],
         ["Step #2", false]
     ]],
-    ["Task #2", "Description goes here", "1984", 0],
+    ["Task #2", "Description goes here", "1984", 0, [
+        ["Sometrhing", false],
+        ["HENLO", true],
+        ["FJKLDJSFKLDJSLFJDS", false]
+    ]],
 ];
 const stepsHardcoded = [
     ["Step #1"],
@@ -20,9 +24,22 @@ const stepsHardcoded = [
     ["Step #4"],
 ];
 
-FrontEnd.LoadEntireTask(tasksHardcoded[0]);
+//FrontEnd.LoadEntireTask(tasksHardcoded[0]);
+//FrontEnd.LoadEntireTask(tasksHardcoded[1]);
 
 FrontEnd.AddEventListeners();
+
+
+import testData from "./json/01.json" assert { type: "json" };
+console.log(testData);
+
+//let obj = JSON.parse(testData);
+let obj = JSON.parse(JSON.stringify(testData));
+for (let i = 0; i < obj.length; i++) {
+    let taskData = obj[i];
+    console.log(taskData);
+    FrontEnd.LoadEntireTask(taskData)
+}
 
 
 /*
