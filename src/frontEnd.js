@@ -65,7 +65,7 @@ export const FrontEnd = (function () {
         let stepData = taskJsonData._steps;
         for (let i = 0; i < stepData.length; i++) {
             let step = stepData[i];
-            task.GenerateNewStep(step.title, step.completed);
+            step = task.GenerateNewStep(step.title, step.completed);
             AddNewStepHTML(task, step);
         }
     }

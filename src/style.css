@@ -319,8 +319,11 @@ Extra div that gives rounded corners to the bottom of the entire section
     padding: 1em 2em;
 }
 
+.taskBanner h2 {
+    margin: 0;
+}
+
 #newTaskButton {
-    padding: 0.25em;
     border-radius: 2em;
     aspect-ratio: 1 / 1;
     height: 100%;
@@ -333,7 +336,7 @@ Extra div that gives rounded corners to the bottom of the entire section
     border: none;
     background: none;
     color: grey;
-    border: 4px solid grey;
+    outline: 4px solid grey;
 
     cursor: pointer;
 }
