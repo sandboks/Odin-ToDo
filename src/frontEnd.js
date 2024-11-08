@@ -3,19 +3,21 @@
 // by outer structure, I mean specifically the "export const ____" declaration, with a self-contained "return" function
 // for my previous restaurant project I structured this differently, and it was very cumbersome, because I didn't know I could do it this way.
 
-import { Task, Step } from "./task.js";
+import { Task, Step, Quest } from "./task.js";
 //import { DragDrop } from "./dragDrop.js";
 
 // DOM manipulation object 
 export const FrontEnd = (function () {
 
-    const StepsContainer = document.querySelector(".stepsContainer");
     const TasksContainer = document.querySelector(".tasksContainer");
     const createDialog = document.getElementById("addNewBookDialog");
     const NewTaskButton = document.getElementById("NewTaskButton");
+    const questsDiv = document.querySelector(".leftPanelRows");
+    const questBanner = document.querySelector(".categoryBanner");
+    const questRows = document.querySelector(".leftPanelRows");
 
-    let _tasks = [];
-    let taskCount = 0;
+    let _quests = [];
+    let _currentQuest = null;
 
     function AddEventListeners() {
         document.addEventListener("keypress", function(event){
@@ -25,78 +27,118 @@ export const FrontEnd = (function () {
 
         NewTaskButton.addEventListener('click', () => {
             CreateNewTask();
-            console.log(_tasks);
         });
     }
 
-    function CreateNewTask(task = null) {
-        let isLoadedFromData = (task != null);
-        if (!isLoadedFromData) {
-            task = new Task("NEW TASK", "", "", 0);
-        }
+    function LoadQuest(questJsonData) {
+        let quest = new Quest(questJsonData.title, questJsonData._tasks);
 
+        //console.log(quest);
 
-        let newTask = CreateNewTaskHTML(task);
-        _tasks.push(task);
+        _quests.push(quest);
+        RenderQuestMenu();
+        //CreateNewQuestHTML(quest);
 
-        // we need a task to contain at least one step
-        if (!isLoadedFromData)
-            AddNewStepHTML(task);
-
-
-
-        //ResyncFrontendToData();
-        let myString = JSON.stringify(_tasks, null, 4);
-        console.log(myString);
-
-        return task;
-
-        //DragDrop.AddRowListeners(newRow);
-    }
-
-    // take in one big array of data consisting of the raw task input, and an array of steps
-    /* 
-   taskRawData = [title, desc, priority, duedate, [["step1", true], ["step2", false]]];
-    */
-    function LoadEntireTask(taskJsonData) {
-        let task = new Task(taskJsonData.title, taskJsonData.description, taskJsonData.dueDate, taskJsonData.priority, taskJsonData.id);
-        CreateNewTask(task);
-
-        let stepData = taskJsonData._steps;
-        for (let i = 0; i < stepData.length; i++) {
-            let step = stepData[i];
-            step = task.GenerateNewStep(step.title, step.completed);
-            AddNewStepHTML(task, step);
+        if (_quests.length == 1) {
+            SetCurrentQuest(quest);
         }
     }
 
-    function CreateNewTaskHTML(t) {
+    function SetCurrentQuest(quest) {
+        if (_currentQuest == quest)
+            return;
+        
+        ResyncFrontendToData();
+
+        _currentQuest = quest;
+        RenderQuest(quest);
+    }
+
+
+    function RenderQuestMenu() {
+        // Delete everything in the quest menu
+        questRows.querySelectorAll(".questRow").forEach((row) =>  {
+            //RemoveAllListeners(row);
+            row.remove();
+        });
+
+        // Create everything in the quest menu
+        _quests.forEach((quest) => {
+            CreateNewQuestHTML(quest);
+        });
+
+    }
+
+    function CreateNewQuestHTML(quest) {
+        let menuRow = AppendDivWithClasses(questsDiv, ["questRow"]);
+            let menuRowContents = AppendDivWithClasses(menuRow, ["menuRowContents"]);
+                let icon = AppendTag(menuRowContents, "img");
+                    // add the img src here
+                let title = AppendTag(menuRowContents, "h3", quest.title);
+
+        menuRow.addEventListener('click', () => {
+            SetCurrentQuest(quest);
+        });
+    }
+
+    function RenderQuest(quest) {
+        ClearAllTaskHTML();
+        SetQuestBanner(quest);
+
+        //console.log(quest);
+        quest._tasks.forEach((task) => RenderTask(task));
+    }
+
+    function ClearAllTaskHTML() {
+        TasksContainer.querySelectorAll(".TaskContainerRounded").forEach((taskNode) => {
+            let addStepButton = taskNode.querySelector("#newTaskButton");
+            RemoveAllListeners(addStepButton);
+            taskNode.remove();
+        });
+    }
+
+    function SetQuestBanner(quest) {
+        questBanner.querySelector("h2").textContent = quest.title;
+    }
+
+    function RenderTask(task) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
             let taskBanner = AppendDivWithClasses(newTask, ["taskBanner"]);
-                let bannerText = AppendTag(taskBanner, "h2", t.title, []);
+                let bannerText = AppendTag(taskBanner, "h2", task.title, []);
                     bannerText.setAttribute("contenteditable", "true");
                 let newTaskButtonDiv = AppendDivWithClasses(taskBanner, []);
                     let newStepButton = AppendTag(newTaskButtonDiv, "button", "+", []);
                         newStepButton.id = "newTaskButton";
             let stepsContainer = AppendDivWithClasses(newTask, ["stepsContainer"]);
 
-        t.HTMLroot = newTask;
-        t.stepsRoot = stepsContainer;
+        task.HTMLroot = newTask;
+        task.stepsRoot = stepsContainer;
 
         //console.log("add button listeners here");
 
         newStepButton.addEventListener("click", () => {
-            AddNewStepHTML(t);
+            //console.log("click" + task);
+            CreateNewStep(task);
         });
+
+        task._steps.forEach((step) => RenderStep(task, step)); 
     }
 
-    function AddNewStepHTML(task, step = null) {
-        let manuallyAddedTask = (step == null);
-        if (step == null) {
-            step = task.GenerateNewStep("");
-        }
+    function CreateNewTask() {
+        let task = _currentQuest.CreateNewBlankTask();
+        //new Task("NEW TASK", "", "", 0);
 
+        RenderTask(task);
+        return;
+        //DragDrop.AddRowListeners(newRow);
+    }
 
+    function CreateNewStep(task) {
+        let step = task.GenerateNewStep("");
+        RenderStep(task, step, true);
+    }
+
+    function RenderStep(task, step, userFocus) {
         let newRow = AppendDivWithClasses(task.stepsRoot, ["stepRow"]);
         newRow.id = step.id;
         
@@ -109,7 +151,7 @@ export const FrontEnd = (function () {
             const stepTitle = AppendTag(newRow, "span", step.title, ["stepTitle"]);
             stepTitle.setAttribute("contenteditable", "true");
             stepTitle.setAttribute("maxlength", 64);
-            if (manuallyAddedTask)
+            if (userFocus)
                 stepTitle.focus();
 
             const closeButtonDiv = AppendDivWithClasses(newRow, ["rowCloseButtonDiv"]);
@@ -119,17 +161,12 @@ export const FrontEnd = (function () {
                 });
 
 
-        //task.AppendStep(step);
-
-        //const priority = AppendDivWithClasses(newRow, ["priorityColor"]);
-
-        //const dueDateSection = AppendDivWithClasses(newRow, ["dueDateSection"]);
-        //const dueDateText = AppendTag(dueDateSection, "span", step.dueDate, []);
-
         return newRow;
     }
 
     function DeleteStep(task, step) {
+        console.log(task);
+        console.log(task.StepCount());
         if (task.StepCount() == 1) {
             console.log("LAST STEP. DELETE ERRYTHING");
             DeleteTask(task);
@@ -143,12 +180,18 @@ export const FrontEnd = (function () {
         //console.log("I probably need to remove listeners here...");
 
         // this step clones the button, and in doing so, removes all eventlisteners attached to it
-        stepDeleteButton.replaceWith(stepDeleteButton.cloneNode(true));
+        RemoveAllListeners(stepDeleteButton);
+        //stepDeleteButton.replaceWith(stepDeleteButton.cloneNode(true));
         stepRoot.remove();
         task.DeleteStep(step);
     }
 
+    function RemoveAllListeners(o) {
+        o.replaceWith(o.cloneNode(true));
+    }
+
     function DeleteTask(task) {
+        let _tasks = _currentQuest._tasks;
         let index = _tasks.indexOf(task); 
         if (index == -1)
             return;
@@ -158,11 +201,17 @@ export const FrontEnd = (function () {
 
 
         let addStepButton = task.HTMLroot.querySelector("#newTaskButton");
-        addStepButton.replaceWith(addStepButton.cloneNode(true));
+        RemoveAllListeners(addStepButton);
+        //addStepButton.replaceWith(addStepButton.cloneNode(true));
         task.HTMLroot.remove();
     }
 
     function ResyncFrontendToData() {
+        if (_currentQuest == null)
+            return;
+        
+        let _tasks = _currentQuest._tasks;
+        
         for (let i = 0; i < _tasks.length; i++) {
             let task = _tasks[i];
             task.title = task.HTMLroot.querySelector("h2").textContent;
@@ -220,7 +269,7 @@ export const FrontEnd = (function () {
     }
 
     return {
-        LoadEntireTask,
+        LoadQuest,
         AddEventListeners,
     };
 })();

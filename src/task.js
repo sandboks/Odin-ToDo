@@ -2,6 +2,30 @@
 title, description, dueDate and priority. You might also want to include notes or even a checklist
 */
 
+export class Quest {
+    title = "";
+    _tasks = [];
+
+    constructor(title, _tasks = []) {
+        this.title = title;
+        _tasks.forEach((data) => {
+            let task = new Task(data.title, data.description, data.dueDate, data.priority, data.id);
+            data._steps.forEach((step) => {
+                task.GenerateNewStep(step.title, step.completed, step.id);
+            });
+            this._tasks.push(task);
+        });
+        //this._tasks = _tasks;
+    }
+
+    CreateNewBlankTask() {
+        let task = new Task("NEW TASK", "", "", "");
+        task.GenerateNewStep("");
+        this._tasks.push(task);
+        return task;
+    }
+}
+
 
 // Declaration
 export class Task {
@@ -66,20 +90,9 @@ These consist of a sentence and a checkbox, and nothing else.
 export class Step {
     id = 0;
     
-    constructor(title, completed = false) {
+    constructor(title, completed = false, id = 0) {
         this.title = title;
         this.completed = completed;
+        this.id = id;
     }
-}
-
- // take in one big array of data consisting of the raw task input, and an array of steps
-    /* 
-    categoryData = [
-        [title, desc, priority, duedate, [["step1", true], ["step2", false]]],
-        [title, desc, priority, duedate, [["step1", true]]],
-    ]
-    */
-
-export class CategoryData {
-
 }
