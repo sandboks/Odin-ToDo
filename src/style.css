@@ -279,16 +279,31 @@ input[type=text]#searchbar  {
 RIGHT SIDE CONTENT
 */
 
+.rightPanel {
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .categoryBanner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 2em;
+    margin: 1em 2em;
+}
+
+.tasksContainerCrop {
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+    position: relative;
+    margin: 1em 0; 
 }
 
 .tasksContainer {
-    gap: 2em;
+    gap: 1em;
     display: grid;
-    margin: 2em;
+    margin: 1em;
 }
 
 .stepsContainer {
