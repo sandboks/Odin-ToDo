@@ -105,6 +105,7 @@ MENU ROWS
 
     padding: 0 0.7em;
     z-index: 2;
+    position: absolute;
 }
 
 .menuRowHeader {
@@ -130,7 +131,7 @@ MENU ROWS
     width: 100%;
 }
 
-.questRowBacking:hover {
+.questRow:hover .questRowBacking {
     opacity: 0.2;
 }
 
