@@ -2,6 +2,8 @@
     --main-color: #F28E1C;
     --main-color-highlighted: #ffffff36;
 
+    --fontDarkGrey: #2f3642;
+
     --colorOffWhite: #f1f1f1;
     --colorOffWhite2: #fafafa;
     --colorSlightGray: #e4e4e4;
@@ -41,8 +43,14 @@ body {
 }
 
 .leftPanel {
-    background-color: var(--main-color);
-    color: white;
+    background-color: var(--colorOffWhite);
+    color: var(--fontDarkGrey);
+}
+
+.leftPanel h2 {
+    border-bottom: solid 2px var(--fontDarkGrey);
+    padding-bottom: 5px;
+    margin: 0 0.75em;
 }
 
 .leftPanelHeader {
@@ -56,7 +64,9 @@ MENU ROWS
 
 .questRow img, .menuRowHeader img {
     width: 24px;
+    /*
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(195deg) brightness(108%) contrast(104%);
+    */
 }
 
 .menuRowHeader img {
@@ -68,18 +78,18 @@ MENU ROWS
 }
 
 .questRow, .menuRowHeader {
-    background-color: var(--main-color);
     transition: var(--transition-time);
 
-    border-left: 0.3em solid transparent
+    border-left: 0.3em solid transparent;
+    position: relative;
 }
 
 .questRow:hover, .menuRowHeader:hover {
     /*background-color: #4b4e5a;*/
-    background-color: var(--main-color-highlighted);
+    background-color: var(--colorSlightGray);
     transition: var(--transition-time);
 
-    border-left: 0.3em solid #ffffff;
+    border-left: 0.5em solid var(--main-color);
     overflow: hidden;   
 }
 
@@ -94,6 +104,7 @@ MENU ROWS
     align-items: center;
 
     padding: 0 0.7em;
+    z-index: 2;
 }
 
 .menuRowHeader {
@@ -106,6 +117,21 @@ MENU ROWS
     display: flex;
     gap: 0.5em;
     padding-right: 1em;
+}
+
+.questRowBacking {
+    position: absolute;
+    top: 0;
+    /* left: 0px; */
+    height: 100%;
+    background: var(--main-color);
+    opacity: 0;
+    z-index: 1;
+    width: 100%;
+}
+
+.questRowBacking:hover {
+    opacity: 0.2;
 }
 
 .topBanner {

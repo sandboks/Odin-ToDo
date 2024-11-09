@@ -6,6 +6,8 @@
 import { Task, Step, Quest } from "./task.js";
 //import { DragDrop } from "./dragDrop.js";
 
+import taskIcon from "./img/menu.svg"
+
 // DOM manipulation object 
 export const FrontEnd = (function () {
 
@@ -74,7 +76,9 @@ export const FrontEnd = (function () {
             let menuRowContents = AppendDivWithClasses(menuRow, ["menuRowContents"]);
                 let icon = AppendTag(menuRowContents, "img");
                     // add the img src here
+                    icon.src = taskIcon;
                 let title = AppendTag(menuRowContents, "h3", quest.title);
+            let coloredBacking = AppendDivWithClasses(menuRow, ["questRowBacking"]);
 
         menuRow.addEventListener('click', () => {
             SetCurrentQuest(quest);
