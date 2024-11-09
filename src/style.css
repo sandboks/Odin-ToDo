@@ -3,6 +3,7 @@
     --main-color-highlighted: #ffffff36;
 
     --fontDarkGrey: #2f3642;
+    --fontDarkGrey2: #464d5a;
 
     --colorOffWhite: #f1f1f1;
     --colorOffWhite2: #fafafa;
@@ -75,6 +76,9 @@ MENU ROWS
 
 .questRow {
     height: 60px;
+    /*
+    color: var(--fontDarkGrey2);
+    */
 }
 
 .questRow, .menuRowHeader {
@@ -106,6 +110,8 @@ MENU ROWS
     padding: 0 0.7em;
     z-index: 2;
     position: absolute;
+
+    opacity: 0.8;
 }
 
 .menuRowHeader {
@@ -315,8 +321,33 @@ RIGHT SIDE CONTENT
 
 .categoryBanner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 1em 2em;
+    grid-template-columns: 1fr auto;
+    margin: 0 2em;
+
+    background: var(--main-color);
+    color: white;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.categoryBanner h2 {
+    margin: 0.5em 0;
+}
+
+.categoryBanner button {
+    font-size: 1.5em;
+    font-family: 'LilitaOne';
+    font-family: "Poppins", sans-serif;
+    /* font-weight: bolder; */
+    color: white;
+    /* color: var(--colorTextNeutral); */
+    background-color: #00000000;
+    /* background-color: white; */
+    white-space: nowrap;
+    /* border-color: white; */
+    border: 3px solid white;
+    transition-duration: var(--durationFast);
+    border-radius: 0.5em;
 }
 
 .tasksContainerCrop {
