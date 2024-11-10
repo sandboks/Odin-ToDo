@@ -13,6 +13,8 @@ export const FrontEnd = (function () {
 
     const TasksContainer = document.querySelector(".tasksContainer");
     const createDialog = document.getElementById("addNewBookDialog");
+    const exportDialog = document.getElementById("export");
+    const exportDialogTextarea = exportDialog.querySelector("textarea");
     const NewTaskButton = document.getElementById("NewTaskButton");
     const questsDiv = document.querySelector(".leftPanelRows");
     const questBanner = document.querySelector(".categoryBanner");
@@ -31,6 +33,8 @@ export const FrontEnd = (function () {
         NewTaskButton.addEventListener('click', () => {
             CreateNewTask();
         });
+
+
     }
 
     function LoadQuest(questJsonData) {
@@ -277,7 +281,10 @@ export const FrontEnd = (function () {
                 //case "=":
                     console.log(document.activeElement);
                     break;
-                case "c":
+                case "=":
+                    exportDialog.show();
+                    ResyncFrontendToData();
+                    exportDialogTextarea.textContent = JSON.stringify(_quests, null, 4);
                     break;
                 case ".":
                     break;

@@ -10,3 +10,4 @@ https://www.theodinproject.com/lessons/node-path-javascript-todo-list
 - pin the navigation so it's always at the top of the screen
 - add drag and drop to everything
 - visual overhaul
+- add a top header banner that goes above errything

@@ -1,14 +1,13 @@
 import "./style.css";
 import "./dialog.css";
 // all major functions are stored in these objects
-import { Task, Step } from "./task.js";
 import { FrontEnd } from "./frontEnd.js" //, domManipulator, notesManager
 
 
 FrontEnd.AddEventListeners();
 
 
-import testData from "./json/02.json" assert { type: "json" };
+import testData from "./json/03.json" assert { type: "json" };
 console.log(testData);
 
 

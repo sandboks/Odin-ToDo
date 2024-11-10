@@ -8,6 +8,7 @@
     --colorOffWhite: #f1f1f1;
     --colorOffWhite2: #fafafa;
     --colorSlightGray: #e4e4e4;
+    --colorSlightGray2: #d0d0d0;
 
     --mainContentMaxWidth: 900px;
     --contentGridSquareWidth: 150px;
@@ -35,6 +36,10 @@ body {
     font-family: 'rubik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+dialog {
+    z-index: 1;
+}
+
 .contentGrid {
     display: grid;
     grid-template-columns: 300px minmax(300px, 1fr);
@@ -54,7 +59,8 @@ LEFT SIDE CONTENT
 
 .leftPanel h2 {
     border-bottom: solid 2px var(--fontDarkGrey);
-    padding-bottom: 5px;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
     margin: 0 0.75em;
 }
 
@@ -146,23 +152,21 @@ MENU ROWS
     opacity: 0.5;
 }
 
-.topBanner {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
-}
-
 /*
 TOP BANNER
 */
 
 .topBanner {
     display: grid;
-    /*
-    background-color: white;
-    color: black;
-    */
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 300px 1fr;
+    grid-column: 1 / 3;
+}
+
+.topBanner h1 {
+    margin: 0;
+    color: var(--main-color);
 }
 
 .topBannerHeader, .topBannerMain {
@@ -327,9 +331,8 @@ RIGHT SIDE CONTENT
     display: grid;
     grid-template-columns: 1fr auto;
     /* margin: 0 2em; */
-    /* background: var(--main-color); */
-    background: var(--);
-    background: var(--colorSlightGray);
+    /* background: var(--main-color); 
+    background: var(--colorSlightGray);*/
     /* border: 0.25em solid var(--main-color); */
     /* color: white; */
     /* border-radius: 0.5em; */
