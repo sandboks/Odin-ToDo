@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odin To-Do</title>
+    <title>SideQuest</title>
 <script defer src="main.js"></script></head>
 <body>
     <!--
     DIALOGUE
     -->
+    <dialog id="export">
+        <div class="closeButtonDiv">
+            <button id="panelCloseButton">
+                <span>+</span>
+            </button>
+        </div>
+        <div class="exportDialogDiv">
+            <textarea name="exportBox" placeholder="exportBox"></textarea>
+        </div>
+    </dialog>
+    
     <dialog id="addNewBookDialog">
         <div class="closeButtonDiv">
             <!--
@@ -53,21 +64,10 @@
     CONTENT
     -->
     <div class="contentGrid">
-        <div class="leftPanel">
+        <div class="topBanner">
             <div class="leftPanelHeader">
-                <h1>Odin To-Do</h1>
+                <h1>SideQuest</h1>
             </div>
-            <div class="leftPanelRows">
-                <h2>Projects</h2>
-                <div class="questRow">
-                    <div class="menuRowContents">
-                        <img src="f8c7c536d6f704fbe961.svg">
-                        <h3>Home</h3>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="rightPanel">
             <div class="topBannerHeader">
                 <div class="topBannerSearch">
                     <img src="54ff7732bb1a5ff166c6.svg" class="avatarAlertSectionSmall">
@@ -88,6 +88,20 @@
                     <h3>Sand Box</h3>
                 </div>
             </div>
+        </div>
+        <div class="leftPanel">
+            <div class="leftPanelRows">
+                <h2>Projects</h2>
+                <div class="questRow">
+                    <div class="menuRowContents">
+                        <img src="f8c7c536d6f704fbe961.svg">
+                        <h3>Home</h3>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="rightPanel">
+            
             <div class="categoryBanner">
                 <h2 contenteditable="true">CategoryName</h2>
                 <button id="NewTaskButton">New Task</button>
