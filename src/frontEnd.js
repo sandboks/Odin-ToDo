@@ -282,9 +282,14 @@ export const FrontEnd = (function () {
                     console.log(document.activeElement);
                     break;
                 case "=":
-                    exportDialog.show();
-                    ResyncFrontendToData();
-                    exportDialogTextarea.textContent = JSON.stringify(_quests, null, 4);
+                    if (exportDialog.open) {
+                        exportDialog.close();
+                    }
+                    else {
+                        exportDialog.show();
+                        ResyncFrontendToData();
+                        exportDialogTextarea.textContent = JSON.stringify(_quests, null, 4);
+                    }
                     break;
                 case ".":
                     break;
