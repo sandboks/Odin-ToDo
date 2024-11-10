@@ -5,9 +5,11 @@ title, description, dueDate and priority. You might also want to include notes o
 export class Quest {
     title = "";
     _tasks = [];
+    id = 0;
 
-    constructor(title, _tasks = []) {
+    constructor(title, _tasks = [], id = 0) {
         this.title = title;
+        this.id = id;
         _tasks.forEach((data) => {
             let task = new Task(data.title, data.description, data.dueDate, data.priority, data.id);
             data._steps.forEach((step) => {

@@ -43,6 +43,10 @@ body {
     color: black;
 }
 
+/*
+LEFT SIDE CONTENT
+*/
+
 .leftPanel {
     background-color: var(--colorOffWhite);
     color: var(--fontDarkGrey);
@@ -70,36 +74,36 @@ MENU ROWS
     */
 }
 
+.questRow:not(.selected) {
+    cursor: pointer;
+}
+
 .menuRowHeader img {
     width: 36px;
 }
 
 .questRow {
     height: 60px;
-    /*
-    color: var(--fontDarkGrey2);
-    */
 }
 
-.questRow, .menuRowHeader {
+.questRow {
     transition: var(--transition-time);
 
-    border-left: 0.3em solid transparent;
+    border-left: 0em solid transparent;
     position: relative;
 }
 
-.questRow:hover, .menuRowHeader:hover {
-    /*background-color: #4b4e5a;*/
-    background-color: var(--colorSlightGray);
-    transition: var(--transition-time);
+.questRow:hover{
+    border-left: 0.25em solid var(--font-color-softer);
+}
 
+.questRow.selected {
     border-left: 0.5em solid var(--main-color);
     overflow: hidden;   
 }
 
-#noHighlight:hover  {
-    background-color: var(--main-color);
-    border-left: 0.3em solid transparent
+.questRow.selected .questRowBacking {
+    opacity: 0.2;
 }
 
 .menuRowContents {
@@ -137,8 +141,9 @@ MENU ROWS
     width: 100%;
 }
 
-.questRow:hover .questRowBacking {
-    opacity: 0.2;
+.questRow:hover:not(.selected) .questRowBacking {
+    background: white;
+    opacity: 0.5;
 }
 
 .topBanner {
@@ -348,6 +353,7 @@ RIGHT SIDE CONTENT
     border: 3px solid white;
     transition-duration: var(--durationFast);
     border-radius: 0.5em;
+    cursor: pointer;
 }
 
 .tasksContainerCrop {

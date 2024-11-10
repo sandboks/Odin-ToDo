@@ -20,6 +20,7 @@ export const FrontEnd = (function () {
 
     let _quests = [];
     let _currentQuest = null;
+    let _questsGenerated = 0;
 
     function AddEventListeners() {
         document.addEventListener("keypress", function(event){
@@ -33,7 +34,7 @@ export const FrontEnd = (function () {
     }
 
     function LoadQuest(questJsonData) {
-        let quest = new Quest(questJsonData.title, questJsonData._tasks);
+        let quest = new Quest(questJsonData.title, questJsonData._tasks, _questsGenerated++);
 
         //console.log(quest);
 
@@ -49,11 +50,24 @@ export const FrontEnd = (function () {
     function SetCurrentQuest(quest) {
         if (_currentQuest == quest)
             return;
+
+        if (_currentQuest != null) {
+            GetQuestHTML(_currentQuest).classList.remove("selected");
+        }
         
         ResyncFrontendToData();
 
         _currentQuest = quest;
+        let currentQuestHTML = GetQuestHTML(_currentQuest);
+        currentQuestHTML.classList.add("selected");
         RenderQuest(quest);
+    }
+
+    function GetQuestHTML(quest) {
+        let s = `.questRow#q${quest.id}`;
+        console.log(s);
+        return document.querySelector(s);
+        return null;
     }
 
 
@@ -83,6 +97,7 @@ export const FrontEnd = (function () {
         menuRow.addEventListener('click', () => {
             SetCurrentQuest(quest);
         });
+        menuRow.id = "q" + quest.id;
     }
 
     function RenderQuest(quest) {
