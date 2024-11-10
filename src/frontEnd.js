@@ -81,7 +81,6 @@ export const FrontEnd = (function () {
         _quests.forEach((quest) => {
             CreateNewQuestHTML(quest);
         });
-
     }
 
     function CreateNewQuestHTML(quest) {
