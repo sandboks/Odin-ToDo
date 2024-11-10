@@ -171,7 +171,6 @@ TOP BANNER
     grid-column: 1fr 1fr; */
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding: 0.5em;
 }
 
 .topBannerAlerts {
@@ -327,30 +326,33 @@ RIGHT SIDE CONTENT
 .categoryBanner {
     display: grid;
     grid-template-columns: 1fr auto;
-    margin: 0 2em;
-
-    background: var(--main-color);
-    color: white;
-    border-radius: 0.5em;
-    padding: 1em;
+    /* margin: 0 2em; */
+    /* background: var(--main-color); */
+    background: var(--);
+    background: var(--colorSlightGray);
+    /* border: 0.25em solid var(--main-color); */
+    /* color: white; */
+    /* border-radius: 0.5em; */
+    padding: 0.5em 3em;
 }
 
 .categoryBanner h2 {
     margin: 0.5em 0;
 }
 
-.categoryBanner button {
-    font-size: 1.5em;
-    font-family: 'LilitaOne';
+.categoryBanner button {    
+    font-size: 1.25em;
+    padding: 0.5em;
     font-family: "Poppins", sans-serif;
     /* font-weight: bolder; */
-    color: white;
-    /* color: var(--colorTextNeutral); */
+    /* color: white; */
     background-color: #00000000;
     /* background-color: white; */
     white-space: nowrap;
     /* border-color: white; */
-    border: 3px solid white;
+    color: grey;
+    border: 3px solid grey;
+    /* border: none; */
     transition-duration: var(--durationFast);
     border-radius: 0.5em;
     cursor: pointer;
@@ -361,7 +363,7 @@ RIGHT SIDE CONTENT
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
     position: relative;
-    margin: 1em 0; 
+    padding-bottom: 2em;
 }
 
 .tasksContainer {
@@ -395,7 +397,7 @@ Extra div that gives rounded corners to the bottom of the entire section
     background-color: var(--colorSlightGray);
     border-radius: 1em 1em 0 0;
     overflow: hidden;
-    padding: 1em 2em;
+    padding: 0.75em 2em;
 }
 
 .taskBanner h2 {
@@ -428,7 +430,7 @@ Extra div that gives rounded corners to the bottom of the entire section
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 1em;
-    padding: 1em 2em;
+    padding: 0.75em 1.5em;
     background-color: var(--colorOffWhite);
     align-items: center;
 

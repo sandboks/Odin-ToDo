@@ -67,7 +67,6 @@ export const FrontEnd = (function () {
         let s = `.questRow#q${quest.id}`;
         console.log(s);
         return document.querySelector(s);
-        return null;
     }
 
 
@@ -98,6 +97,10 @@ export const FrontEnd = (function () {
             SetCurrentQuest(quest);
         });
         menuRow.id = "q" + quest.id;
+
+        if (_currentQuest == quest) {
+            GetQuestHTML(_currentQuest).classList.add("selected");
+        }
     }
 
     function RenderQuest(quest) {
