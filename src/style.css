@@ -57,11 +57,17 @@ LEFT SIDE CONTENT
     color: var(--fontDarkGrey);
 }
 
-.leftPanel h2 {
+.projectsHeader {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    justify-content: space-between;
     border-bottom: solid 2px var(--fontDarkGrey);
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
     margin: 0 0.75em;
+    padding: 0.5em;
+}
+
+.leftPanel h2 {
+    margin: 0;
 }
 
 .leftPanelHeader {
@@ -167,6 +173,10 @@ TOP BANNER
 .topBanner h1 {
     margin: 0;
     color: var(--main-color);
+}
+
+.topBanner h3 {
+    margin: 0;
 }
 
 .topBannerHeader, .topBannerMain {
@@ -337,6 +347,7 @@ RIGHT SIDE CONTENT
     /* color: white; */
     /* border-radius: 0.5em; */
     padding: 0.5em 3em;
+    gap: 2em;
 }
 
 .categoryBanner h2 {
@@ -475,16 +486,38 @@ input[type="checkbox" i] {
     aspect-ratio: 1 / 1;
 }
 
-.priorityColor {
-    background: red;
+/*
+"+" PLUS BUTTON
+*/
+
+.perfectSquare {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+.plusButton {
+    border-radius: 2em;
     aspect-ratio: 1 / 1;
-    height: 1em;
     height: 100%;
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    border: none;
+    background: none;
+    color: grey;
+    border: 3px solid grey;
+    cursor: pointer;
 }
 
-.dueDateSection {
-    width: 4.5em;
-    text-align: right;
+.plusButton:hover {
+    background: darkgray;
 }
 
+.rotated {
+    transform: rotate(45deg);
+}
+
+.plusButton span {
+    position: absolute;
+}
