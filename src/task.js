@@ -57,7 +57,7 @@ export class Task {
 
     GenerateNewStep(title, completed = false) {
         let s = new Step(title, completed);
-        s.id = this._stepsGenerated++;
+        s.id = "s" + this._stepsGenerated++;
         this._steps.push(s);
         //console.log(this._steps);
         return s;

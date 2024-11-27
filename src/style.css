@@ -486,6 +486,14 @@ input[type="checkbox" i] {
     aspect-ratio: 1 / 1;
 }
 
+.rowCloseButtonDiv {
+    display: none;
+}
+
+.stepRow:hover .rowCloseButtonDiv {
+    display: block;
+}
+
 /*
 "+" PLUS BUTTON
 */

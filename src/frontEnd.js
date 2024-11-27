@@ -19,6 +19,7 @@ export const FrontEnd = (function () {
     const questsDiv = document.querySelector(".leftPanelRows");
     const questBanner = document.querySelector(".categoryBanner");
     const questRows = document.querySelector(".leftPanelRows");
+    const newQuestButton = document.getElementById("newQuestButton");
 
     let _quests = [];
     let _currentQuest = null;
@@ -32,6 +33,10 @@ export const FrontEnd = (function () {
 
         NewTaskButton.addEventListener('click', () => {
             CreateNewTask();
+        });
+
+        newQuestButton.addEventListener('click', () => {
+            CreateNewQuest();
         });
 
 
@@ -147,6 +152,12 @@ export const FrontEnd = (function () {
         });
 
         task._steps.forEach((step) => RenderStep(task, step)); 
+    }
+
+    function CreateNewQuest() {
+        let quest = new Quest("NEW QUEST", [], _questsGenerated++);
+        _quests.push(quest);
+        RenderQuestMenu();
     }
 
     function CreateNewTask() {
@@ -279,7 +290,7 @@ export const FrontEnd = (function () {
             switch (x) {
                 case "Enter":
                 //case "=":
-                    console.log(document.activeElement);
+                    InputMoveToNext();
                     break;
                 case "=":
                     if (exportDialog.open) {
@@ -298,6 +309,19 @@ export const FrontEnd = (function () {
                 case "⌫":
                     break;
             }
+        }
+    }
+
+    function InputMoveToNext() {
+        console.log(document.activeElement);
+        if (document.activeElement.classList.contains("stepTitle")) {
+            let parent = document.activeElement.parentElement;
+            console.log(parent);
+            let next = parent.nextSibling;
+            if (next == null)
+                return;
+            console.log(next);
+            next.querySelector(".stepTitle").focus();
         }
     }
 
