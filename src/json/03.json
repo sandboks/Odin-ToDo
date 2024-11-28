@@ -1,6 +1,104 @@
 [
+    
     {
-        "title": "Gold Coast trip 2024",
+        "title": "Odin Project \"To-Do\" list",
+        "_tasks": [
+            {
+                "title": "save to browser cookie",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "google how to do it",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "implement save feature using json",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "add a way to clear user settings (for testing and otherwise)",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 4,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "intro screen",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "add dialogue window",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "make it laid out nice",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "have a button to load into a new user",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "have a button to load a demo project that won't save",
+                        "completed": false
+                    },
+                    {
+                        "id": "s4",
+                        "title": "skip this screen if user data is already present",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 5,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "extras",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "drag and drop functionality for steps, tasks, quests",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "dark mode toggle",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "color picker",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 3,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            }
+        ],
+        "id": 2
+    },
+    {
+        "title": "Sydney trip 2024",
         "_tasks": [
             {
                 "title": "Carry-on",
@@ -10,22 +108,22 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "Laptop",
                         "completed": false
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "Hoodie",
                         "completed": true
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "Airpods",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "Housekeys",
                         "completed": false
                     }
@@ -42,27 +140,27 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "Shirts x 4",
                         "completed": true
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "Socks x 4",
                         "completed": false
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "Undies x 4",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "Jeans x 1",
                         "completed": false
                     },
                     {
-                        "id": 4,
+                        "id": "s4",
                         "title": "Winter jacket x 1",
                         "completed": false
                     }
@@ -79,22 +177,22 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "Swimmers",
                         "completed": false
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "Swim goggles",
                         "completed": false
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "Mesh bag",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "Sports band for watch",
                         "completed": false
                     }
@@ -111,37 +209,37 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "Toothbrush",
-                        "completed": false
+                        "completed": true
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "Toothpaste",
-                        "completed": false
+                        "completed": true
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "Floss",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "Sunscreen",
                         "completed": false
                     },
                     {
-                        "id": 4,
+                        "id": "s4",
                         "title": "Cotton buds",
                         "completed": false
                     },
                     {
-                        "id": 5,
+                        "id": "s5",
                         "title": "Reading glasses",
                         "completed": false
                     },
                     {
-                        "id": 6,
+                        "id": "s6",
                         "title": "Paracetamol",
                         "completed": false
                     }
@@ -158,27 +256,27 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "AC wall plug",
                         "completed": false
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "usbc cable",
                         "completed": false
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "phone charging stand",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "watch charger",
                         "completed": false
                     },
                     {
-                        "id": 4,
+                        "id": "s4",
                         "title": "Nintendo Switch",
                         "completed": false
                     }
@@ -201,114 +299,72 @@
                 "id": 0,
                 "_steps": [
                     {
-                        "id": 0,
+                        "id": "s0",
                         "title": "celery",
                         "completed": false
                     },
                     {
-                        "id": 1,
+                        "id": "s1",
                         "title": "2 carrots",
                         "completed": false
                     },
                     {
-                        "id": 2,
+                        "id": "s2",
                         "title": "baby spinach",
                         "completed": false
                     },
                     {
-                        "id": 3,
+                        "id": "s3",
                         "title": "1 onion",
                         "completed": false
                     },
                     {
-                        "id": 4,
+                        "id": "s4",
                         "title": "garlic",
                         "completed": false
                     },
                     {
-                        "id": 5,
+                        "id": "s5",
                         "title": "1 zucchini",
                         "completed": false
                     },
                     {
-                        "id": 6,
-                        "title": "",
+                        "id": "s6",
+                        "title": "tomato paste",
                         "completed": false
                     },
                     {
-                        "id": 7,
-                        "title": "",
+                        "id": "s7",
+                        "title": "1 litre veggie stock",
                         "completed": false
                     },
                     {
-                        "id": 8,
-                        "title": "",
+                        "id": "s8",
+                        "title": "1 can crushed tomatoes",
                         "completed": false
                     },
                     {
-                        "id": 9,
-                        "title": "",
+                        "id": "s9",
+                        "title": "1 can cannelloni beans",
                         "completed": false
                     },
                     {
-                        "id": 10,
-                        "title": "",
+                        "id": "s10",
+                        "title": "bay leaves",
                         "completed": false
                     },
                     {
-                        "id": 11,
-                        "title": "",
+                        "id": "s11",
+                        "title": "oregano",
                         "completed": false
                     },
                     {
-                        "id": 12,
-                        "title": "",
+                        "id": "s12",
+                        "title": "thyme",
                         "completed": false
                     }
                 ],
                 "_stepsGenerated": 13,
-                "HTMLroot": {},
-                "stepsRoot": {}
-            },
-            {
-                "title": "NEW TASK",
-                "description": "",
-                "dueDate": "",
-                "priority": "",
-                "id": 0,
-                "_steps": [
-                    {
-                        "id": 0,
-                        "title": "",
-                        "completed": false
-                    },
-                    {
-                        "id": 1,
-                        "title": "",
-                        "completed": false
-                    },
-                    {
-                        "id": 2,
-                        "title": "",
-                        "completed": false
-                    },
-                    {
-                        "id": 3,
-                        "title": "",
-                        "completed": false
-                    },
-                    {
-                        "id": 4,
-                        "title": "",
-                        "completed": false
-                    },
-                    {
-                        "id": 5,
-                        "title": "",
-                        "completed": false
-                    }
-                ],
-                "_stepsGenerated": 6,
                 "HTMLroot": {},
                 "stepsRoot": {}
             }

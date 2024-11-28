@@ -20,6 +20,7 @@ export const FrontEnd = (function () {
     const questBanner = document.querySelector(".categoryBanner");
     const questRows = document.querySelector(".leftPanelRows");
     const newQuestButton = document.getElementById("newQuestButton");
+    const questHeaderText = document.querySelector(".categoryBanner h2");
 
     let _quests = [];
     let _currentQuest = null;
@@ -39,7 +40,13 @@ export const FrontEnd = (function () {
             CreateNewQuest();
         });
 
-
+        questHeaderText.addEventListener('input', () => {
+            questHeaderText.textContent = questHeaderText.textContent.substring(0, 32);
+            if (_currentQuest.title != questHeaderText.textContent) {
+                _currentQuest.title = questHeaderText.textContent;
+                RenderQuestMenu();
+            }
+        });
     }
 
     function LoadQuest(questJsonData) {
@@ -74,7 +81,7 @@ export const FrontEnd = (function () {
 
     function GetQuestHTML(quest) {
         let s = `.questRow#q${quest.id}`;
-        console.log(s);
+        //console.log(s);
         return document.querySelector(s);
     }
 
@@ -318,10 +325,15 @@ export const FrontEnd = (function () {
             let parent = document.activeElement.parentElement;
             console.log(parent);
             let next = parent.nextSibling;
-            if (next == null)
+            if (next == null) {
+                console.log("TODO: generate a new step and jump to it");
                 return;
-            console.log(next);
-            next.querySelector(".stepTitle").focus();
+            }
+            else {
+                console.log(next);
+                next.querySelector(".stepTitle").focus();
+            }
+            
         }
     }
 

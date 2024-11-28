@@ -43,6 +43,7 @@ dialog {
 .contentGrid {
     display: grid;
     grid-template-columns: 300px minmax(300px, 1fr);
+    grid-template-rows: auto 1fr;
     height: 100vh;
     background-color: white;
     color: black;
@@ -55,6 +56,7 @@ LEFT SIDE CONTENT
 .leftPanel {
     background-color: var(--colorOffWhite);
     color: var(--fontDarkGrey);
+    overflow: hidden;
 }
 
 .projectsHeader {
@@ -168,6 +170,7 @@ TOP BANNER
     justify-content: center;
     grid-template-columns: 300px 1fr;
     grid-column: 1 / 3;
+    padding: 0.5em 0;
 }
 
 .topBanner h1 {
@@ -332,7 +335,6 @@ RIGHT SIDE CONTENT
 
 .rightPanel {
     overflow: hidden;
-    height: 100vh;
     display: flex;
     flex-direction: column;
 }
