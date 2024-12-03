@@ -1,9 +1,36 @@
+/* PARENT DIV */
+
+.dialogParent {
+    width: 100%;
+    height: 100%;
+    /* height: 500px; */
+    display: absolute;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+/* DIALOG BACKGROUND */
+/* used for the backdrop effect - won't work in Firefox otherwise */
+
+.dialogBackdrop {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 12;
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+}
+
 /* MODAL DIALOG */
 
 dialog {
     border: none !important;
     border-radius: 1em;
     padding: 1.5em;
+    z-index: 13;
 }
 
 dialog {

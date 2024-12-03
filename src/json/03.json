@@ -4,33 +4,6 @@
         "title": "Odin Project \"To-Do\" list",
         "_tasks": [
             {
-                "title": "save to browser cookie",
-                "description": "",
-                "dueDate": "",
-                "priority": "",
-                "id": 0,
-                "_steps": [
-                    {
-                        "id": "s0",
-                        "title": "google how to do it",
-                        "completed": false
-                    },
-                    {
-                        "id": "s1",
-                        "title": "implement save feature using json",
-                        "completed": false
-                    },
-                    {
-                        "id": "s2",
-                        "title": "add a way to clear user settings (for testing and otherwise)",
-                        "completed": false
-                    }
-                ],
-                "_stepsGenerated": 4,
-                "HTMLroot": {},
-                "stepsRoot": {}
-            },
-            {
                 "title": "intro screen",
                 "description": "",
                 "dueDate": "",
@@ -64,6 +37,33 @@
                     }
                 ],
                 "_stepsGenerated": 5,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "save to browser cookie",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "google how to do it",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "implement save feature using json",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "add a way to clear user settings (for testing and otherwise)",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 4,
                 "HTMLroot": {},
                 "stepsRoot": {}
             },
