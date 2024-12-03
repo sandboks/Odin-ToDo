@@ -9,57 +9,70 @@
     <!--
     DIALOGUE
     -->
-    <dialog id="export">
-        <div class="closeButtonDiv">
-            <button id="panelCloseButton">
-                <span>+</span>
-            </button>
-        </div>
-        <div class="exportDialogDiv">
-            <textarea name="exportBox" placeholder="exportBox"></textarea>
-        </div>
-    </dialog>
-    
-    <dialog id="addNewBookDialog">
-        <div class="closeButtonDiv">
-            <!--
-            <img src="img/close-circle-outline.svg" id="panelCloseButton" class="buttonImage">
-            -->
-            <button id="panelCloseButton">
-                <span>+</span>
-            </button>
-        </div>
-        <div class="addNewBookDialogDiv">
-            <h1 id="dialogHeaderText">Edit</h1>
-            <form method="dialog" id="addNewBookForm">
-                <div class="formInputSection">
-                    <div>
-                        <input type="text" name="title" placeholder="Title">
-                    </div>
+    <div class="dialogParent">
+        <dialog id="FirstTimePopup">
 
-                    <div class="SideBySide">
-                        <label for="priority">Priority:</label>
-                        <select name="priority" id="priority">
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low" selected="selected">Low</option>
-                        </select>
-                        <div> 
-                            <label for="dateField">Date:</label>
-                            <input type="date" id="dateField">
+            <div class="closeButtonDiv">
+                <button id="panelCloseButton">
+                    <span>+</span>
+                </button>
+            </div>
+            <p>Welcome to SideQuest!</p>
+        </dialog>
+        <dialog id="export">
+            <div class="closeButtonDiv">
+                <button id="panelCloseButton">
+                    <span>+</span>
+                </button>
+            </div>
+            <div class="exportDialogDiv">
+                <textarea name="exportBox" placeholder="exportBox"></textarea>
+            </div>
+        </dialog>
+        
+        <dialog id="addNewBookDialog">
+            <div class="closeButtonDiv">
+                <!--
+                <img src="img/close-circle-outline.svg" id="panelCloseButton" class="buttonImage">
+                -->
+                <button id="panelCloseButton">
+                    <span>+</span>
+                </button>
+            </div>
+            <div class="addNewBookDialogDiv">
+                <h1 id="dialogHeaderText">Edit</h1>
+                <form method="dialog" id="addNewBookForm">
+                    <div class="formInputSection">
+                        <div>
+                            <input type="text" name="title" placeholder="Title">
+                        </div>
+
+                        <div class="SideBySide">
+                            <label for="priority">Priority:</label>
+                            <select name="priority" id="priority">
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low" selected="selected">Low</option>
+                            </select>
+                            <div> 
+                                <label for="dateField">Date:</label>
+                                <input type="date" id="dateField">
+                            </div>
+                        </div>
+                        <div>
+                            <textarea name="description" placeholder="Description"></textarea>
+                            <!--
+                            <input type="text" name="description" placeholder="Description">
+                            -->  
                         </div>
                     </div>
-                    <div>
-                        <textarea name="description" placeholder="Description"></textarea>
-                        <!--
-                        <input type="text" name="description" placeholder="Description">
-                        -->  
-                    </div>
-                </div>
-            </form>
-            <button id="dialogSaveButton">Save changes</button>
-        </div>
-    </dialog>
+                </form>
+                <button id="dialogSaveButton">Save changes</button>
+            </div>
+        </dialog>
+
+        <div class="dialogBackdrop"></div>
+    </div>
     <!--
     CONTENT
     -->
