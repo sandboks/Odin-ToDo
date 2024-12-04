@@ -167,11 +167,14 @@ TOP BANNER
     grid-template-columns: 300px 1fr;
     grid-column: 1 / 3;
     padding: 0.5em 0;
+
+    border-bottom: solid 3px var(--colorPanelBorder);
 }
 
 .topBanner h1 {
     margin: 0;
     color: var(--main-color);
+    user-select: none;
 }
 
 .topBanner h3 {
@@ -182,7 +185,7 @@ TOP BANNER
     display: grid;
     /* grid-auto-columns: auto; 
     grid-column: 1fr 1fr; */
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
 }
 
@@ -412,18 +415,18 @@ Extra div that gives rounded corners to the bottom of the entire section
     padding: 0.75em 2em;
 }
 
-.taskBanner h2 {
+.taskBanner h3 {
     margin: 0;
 }
 
 #newTaskButton {
+    /*
     border-radius: 2em;
     aspect-ratio: 1 / 1;
     height: 100%;
 
     display: flex;
     align-items: center;
-    /* justify-content: center; */
 
     font-size: xx-large;
     border: none;
@@ -432,6 +435,9 @@ Extra div that gives rounded corners to the bottom of the entire section
     outline: 4px solid grey;
 
     cursor: pointer;
+    */
+
+    font-size: 16pt;
 }
 
 #newTaskButton:hover {
@@ -474,8 +480,10 @@ input[type="checkbox" i] {
 
 .stepTitle {
     flex-grow: 1;
+    overflow: auto;
 }
 
+/* deal with user input entering /n characters */
 .stepTitle br {
     display: none;
 }
@@ -498,7 +506,7 @@ input[type="checkbox" i] {
 
 .perfectSquare {
     aspect-ratio: 1/1;
-    overflow: hidden;
+    min-height: 1.5em;
 }
 
 .plusButton {

@@ -21,6 +21,7 @@ export const FrontEnd = (function () {
     const questRows = document.querySelector(".leftPanelRows");
     const newQuestButton = document.getElementById("newQuestButton");
     const questHeaderText = document.querySelector(".categoryBanner h2");
+    const rightPanel = document.querySelector(".rightPanel");
 
     let _quests = [];
     let _currentQuest = null;
@@ -47,6 +48,8 @@ export const FrontEnd = (function () {
                 RenderQuestMenu();
             }
         });
+
+        rightPanel.style.display = "none";
     }
 
     function LoadQuest(questJsonData) {
@@ -77,6 +80,7 @@ export const FrontEnd = (function () {
         let currentQuestHTML = GetQuestHTML(_currentQuest);
         currentQuestHTML.classList.add("selected");
         RenderQuest(quest);
+        rightPanel.style.display = "flex";
     }
 
     function GetQuestHTML(quest) {
@@ -138,14 +142,28 @@ export const FrontEnd = (function () {
         questBanner.querySelector("h2").textContent = quest.title;
     }
 
+/*
+<div class="perfectSquare">
+    <button class="plusButton" id="newQuestButton">
+        <span>+</span>
+    </button>
+</div>
+                    */
+
     function RenderTask(task) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
             let taskBanner = AppendDivWithClasses(newTask, ["taskBanner"]);
-                let bannerText = AppendTag(taskBanner, "h2", task.title, []);
+                let bannerText = AppendTag(taskBanner, "h3", task.title, []);
                     bannerText.setAttribute("contenteditable", "true");
+                let newTaskButtonDiv = AppendDivWithClasses(taskBanner, ["perfectSquare"]);
+                    let newStepButton = AppendTag(newTaskButtonDiv, "button", "", ["plusButton"]);
+                        newStepButton.id = "newTaskButton";
+                        let newStepButtonSpan = AppendTag(newStepButton, "span", "+", []);
+                /*
                 let newTaskButtonDiv = AppendDivWithClasses(taskBanner, []);
                     let newStepButton = AppendTag(newTaskButtonDiv, "button", "+", []);
                         newStepButton.id = "newTaskButton";
+                */
             let stepsContainer = AppendDivWithClasses(newTask, ["stepsContainer"]);
 
         task.HTMLroot = newTask;
@@ -165,6 +183,8 @@ export const FrontEnd = (function () {
         let quest = new Quest("NEW QUEST", [], _questsGenerated++);
         _quests.push(quest);
         RenderQuestMenu();
+        if (_currentQuest == null)
+            SetCurrentQuest(quest);
     }
 
     function CreateNewTask() {
@@ -257,7 +277,7 @@ export const FrontEnd = (function () {
         
         for (let i = 0; i < _tasks.length; i++) {
             let task = _tasks[i];
-            task.title = task.HTMLroot.querySelector("h2").textContent;
+            task.title = task.HTMLroot.querySelector("h3").textContent;
 
             let stepTitles = task.stepsRoot.querySelectorAll(".stepTitle");
             let checkboxes = task.stepsRoot.querySelectorAll('input[type="checkbox"]');

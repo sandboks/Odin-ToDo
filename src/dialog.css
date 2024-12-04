@@ -1,3 +1,20 @@
+:root {
+    --colorPanelBorder: #b6b6b6;
+    --colorTextNeutral: #9d9d9d;
+
+    --durationFast: 0.1s;
+    --durationFast2: 0.2s;
+    --durationMedium: 0.5s;
+    --durationSlow: 1.5s;
+
+    --borderRadiusSmall: 0.25em;
+
+    --buttonHeight: 3em;
+    --buttonHeightMobile: 2em;
+
+    --contentPadding: 1em;
+}
+
 /* PARENT DIV */
 
 .dialogParent {
@@ -35,14 +52,71 @@ dialog {
     padding: 1.5em;
     z-index: 13;
     pointer-events: auto;
-}
-
-dialog {
     border: none !important;
     border-radius: 1em;
     padding: 1.5em;
     overflow: visible;
 }
+
+/* ONBOARDING DIALOG */
+
+#FirstTimePopup {
+    min-width: 400px;
+    text-align: center;
+}
+
+.twoGrid {
+    margin: 1em 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    height: 4em;
+}
+
+button {
+    cursor: pointer;
+}
+
+.thickButton {
+    font-size: 1.5em;
+    font-family: 'LilitaOne';
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    color: white;
+    color: var(--colorTextNeutral);
+    background-color: var(--colorTextNeutral);
+    background-color: white;
+    white-space: nowrap;
+    border-color: var(--colorPanelBorder);
+    border: 2px solid var(--colorPanelBorder);
+    transition-duration: var(--durationFast);
+    border-radius: var(--borderRadiusSmall);
+
+    overflow: hidden;
+    box-sizing: border-box;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thickButton:hover {
+    font-size: 1.75em;
+    transition-duration: var(--durationFast);
+    filter: brightness(90%);
+    border-width: 6px;
+    letter-spacing: 1px;
+}
+
+.thickButton span {
+    position: absolute;
+}
+
+
+
+
+
+
 
 dialog:-internal-dialog-in-top-layer::backdrop {
     position: fixed;

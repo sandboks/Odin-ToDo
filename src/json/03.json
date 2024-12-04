@@ -28,7 +28,7 @@
                     {
                         "id": "s3",
                         "title": "have a button to load a demo project that won't save",
-                        "completed": false
+                        "completed": true
                     },
                     {
                         "id": "s4",
