@@ -38,46 +38,35 @@
                 <textarea name="exportBox" placeholder="exportBox"></textarea>
             </div>
         </dialog>
-        
-        <dialog id="addNewBookDialog">
+
+        <dialog id="userSettingsDialog">
             <div class="closeButtonDiv">
-                <!--
-                <img src="img/close-circle-outline.svg" id="panelCloseButton" class="buttonImage">
-                -->
                 <button id="panelCloseButton">
                     <span>+</span>
                 </button>
             </div>
-            <div class="addNewBookDialogDiv">
-                <h1 id="dialogHeaderText">Edit</h1>
-                <form method="dialog" id="addNewBookForm">
-                    <div class="formInputSection">
-                        <div>
-                            <input type="text" name="title" placeholder="Title">
-                        </div>
-
-                        <div class="SideBySide">
-                            <label for="priority">Priority:</label>
-                            <select name="priority" id="priority">
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low" selected="selected">Low</option>
-                            </select>
-                            <div> 
-                                <label for="dateField">Date:</label>
-                                <input type="date" id="dateField">
-                            </div>
-                        </div>
-                        <div>
-                            <textarea name="description" placeholder="Description"></textarea>
-                            <!--
-                            <input type="text" name="description" placeholder="Description">
-                            -->  
-                        </div>
+            <h1>User Settings</h1>
+            
+            <div class="settingsColoredSection">
+                <div class="perfectSquare">
+                    <div class="settingsAvatar">
+                        <img src="94b73702facec90adfd7.png" draggable="false">
                     </div>
-                </form>
-                <button id="dialogSaveButton">Save changes</button>
+                </div>
+                <input type="text" id="playerName" required="" minlength="1" maxlength="32">
+                <div class="grid2x1">
+                    <input type="color" id="colorPicker" name="customColor" value="#ff9d00">
+                    <button class="nightModeButton">
+                        <img src="83fa0c9fe1ff51982b36.svg">
+                    </button>
+                </div>
+                <div class="coloredBacking"></div>
             </div>
+
+            <button class="thickButton" id="deleteAllDataButton">
+                
+                Delete all data
+            </button>
         </dialog>
 
         <div class="dialogBackdrop"></div>
@@ -107,7 +96,7 @@
                     -->
                     <div class="perfectSquare">
                         <div class="roundedIconButton" id="gearButton">
-                            <img src="21a2bc942cb9bc7cfffa.svg">
+                            <img src="21a2bc942cb9bc7cfffa.svg" draggable="false">
                         </div>
                     </div>
                 </div>
