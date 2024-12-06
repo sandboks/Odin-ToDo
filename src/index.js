@@ -6,8 +6,10 @@ import { Onboarding } from "./onboarding.js";
 
 
 FrontEnd.AddEventListeners();
+Onboarding.AddEventListeners();
 
-Onboarding.ShowPopup();
+Onboarding.ShowInitialPopup();
+//Onboarding.ShowSettingsPopupDebug();
 
 
 

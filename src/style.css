@@ -340,7 +340,7 @@ input[type=text]#searchbar  {
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: var(--font-color-softer-dark);
+        background: var(--main-color);
         padding: 0.25em;
         cursor: pointer;
 }
@@ -513,6 +513,7 @@ input:checked{
     aspect-ratio: 1/1;
     min-height: 1.5em;
     height: 100%;
+    overflow: hidden;
 }
 
 .plusButton {

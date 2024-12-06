@@ -22,6 +22,11 @@
                     },
                     {
                         "id": "s2",
+                        "title": "close button works as a placeholder for the new user stuff",
+                        "completed": true
+                    },
+                    {
+                        "id": "s5",
                         "title": "have a button to load into a new user",
                         "completed": false
                     },
@@ -87,7 +92,7 @@
                     {
                         "id": "s2",
                         "title": "color picker",
-                        "completed": false
+                        "completed": true
                     }
                 ],
                 "_stepsGenerated": 3,

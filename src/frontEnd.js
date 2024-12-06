@@ -4,6 +4,7 @@
 // for my previous restaurant project I structured this differently, and it was very cumbersome, because I didn't know I could do it this way.
 
 import { Task, Step, Quest } from "./task.js";
+import { BackEnd } from "./BackEnd.js";
 //import { DragDrop } from "./dragDrop.js";
 
 import taskIcon from "./img/menu.svg"
@@ -23,9 +24,7 @@ export const FrontEnd = (function () {
     const questHeaderText = document.querySelector(".categoryBanner h2");
     const rightPanel = document.querySelector(".rightPanel");
 
-    let _quests = [];
-    let _currentQuest = null;
-    let _questsGenerated = 0;
+    const DialogBackdrop = document.querySelector(".dialogBackdrop");
 
     function AddEventListeners() {
         document.addEventListener("keypress", function(event){
@@ -33,54 +32,20 @@ export const FrontEnd = (function () {
             ProcessInput(x);
         });
 
-        NewTaskButton.addEventListener('click', () => {
-            CreateNewTask();
+        newQuestButton.addEventListener('click', () => {
+            BackEnd.CreateNewQuest();
         });
 
-        newQuestButton.addEventListener('click', () => {
-            CreateNewQuest();
+        NewTaskButton.addEventListener('click', () => {
+            BackEnd.CreateNewTask();
         });
 
         questHeaderText.addEventListener('input', () => {
             questHeaderText.textContent = questHeaderText.textContent.substring(0, 32);
-            if (_currentQuest.title != questHeaderText.textContent) {
-                _currentQuest.title = questHeaderText.textContent;
-                RenderQuestMenu();
-            }
+            BackEnd.RenameCurrentQuest(questHeaderText.textContent);
         });
 
         rightPanel.style.display = "none";
-    }
-
-    function LoadQuest(questJsonData) {
-        let quest = new Quest(questJsonData.title, questJsonData._tasks, _questsGenerated++);
-
-        //console.log(quest);
-
-        _quests.push(quest);
-        RenderQuestMenu();
-        //CreateNewQuestHTML(quest);
-
-        if (_quests.length == 1) {
-            SetCurrentQuest(quest);
-        }
-    }
-
-    function SetCurrentQuest(quest) {
-        if (_currentQuest == quest)
-            return;
-
-        if (_currentQuest != null) {
-            GetQuestHTML(_currentQuest).classList.remove("selected");
-        }
-        
-        ResyncFrontendToData();
-
-        _currentQuest = quest;
-        let currentQuestHTML = GetQuestHTML(_currentQuest);
-        currentQuestHTML.classList.add("selected");
-        RenderQuest(quest);
-        rightPanel.style.display = "flex";
     }
 
     function GetQuestHTML(quest) {
@@ -90,7 +55,7 @@ export const FrontEnd = (function () {
     }
 
 
-    function RenderQuestMenu() {
+    function RenderQuestMenu(_quests, _currentQuest) {
         // Delete everything in the quest menu
         questRows.querySelectorAll(".questRow").forEach((row) =>  {
             //RemoveAllListeners(row);
@@ -100,6 +65,9 @@ export const FrontEnd = (function () {
         // Create everything in the quest menu
         _quests.forEach((quest) => {
             CreateNewQuestHTML(quest);
+            if (_currentQuest == quest) {
+                GetQuestHTML(_currentQuest).classList.add("selected");
+            }
         });
     }
 
@@ -113,13 +81,23 @@ export const FrontEnd = (function () {
             let coloredBacking = AppendDivWithClasses(menuRow, ["questRowBacking"]);
 
         menuRow.addEventListener('click', () => {
-            SetCurrentQuest(quest);
+            BackEnd.SetCurrentQuest(quest);
         });
         menuRow.id = "q" + quest.id;
+    }
 
-        if (_currentQuest == quest) {
-            GetQuestHTML(_currentQuest).classList.add("selected");
+    function SetCurrentQuestHTML(_currentQuest, quest) {
+        if (_currentQuest != null) {
+            GetQuestHTML(_currentQuest).classList.remove("selected");
         }
+        
+        ResyncFrontendToData(_currentQuest);
+
+        _currentQuest = quest;
+        let currentQuestHTML = GetQuestHTML(_currentQuest);
+        currentQuestHTML.classList.add("selected");
+        RenderQuest(quest);
+        rightPanel.style.display = "flex";
     }
 
     function RenderQuest(quest) {
@@ -141,14 +119,6 @@ export const FrontEnd = (function () {
     function SetQuestBanner(quest) {
         questBanner.querySelector("h2").textContent = quest.title;
     }
-
-/*
-<div class="perfectSquare">
-    <button class="plusButton" id="newQuestButton">
-        <span>+</span>
-    </button>
-</div>
-                    */
 
     function RenderTask(task) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
@@ -173,32 +143,10 @@ export const FrontEnd = (function () {
 
         newStepButton.addEventListener("click", () => {
             //console.log("click" + task);
-            CreateNewStep(task);
+            BackEnd.CreateNewStep(task);
         });
 
         task._steps.forEach((step) => RenderStep(task, step)); 
-    }
-
-    function CreateNewQuest() {
-        let quest = new Quest("NEW QUEST", [], _questsGenerated++);
-        _quests.push(quest);
-        RenderQuestMenu();
-        if (_currentQuest == null)
-            SetCurrentQuest(quest);
-    }
-
-    function CreateNewTask() {
-        let task = _currentQuest.CreateNewBlankTask();
-        //new Task("NEW TASK", "", "", 0);
-
-        RenderTask(task);
-        return;
-        //DragDrop.AddRowListeners(newRow);
-    }
-
-    function CreateNewStep(task) {
-        let step = task.GenerateNewStep("");
-        RenderStep(task, step, true);
     }
 
     function RenderStep(task, step, userFocus) {
@@ -269,7 +217,7 @@ export const FrontEnd = (function () {
         task.HTMLroot.remove();
     }
 
-    function ResyncFrontendToData() {
+    function ResyncFrontendToData(_currentQuest) {
         if (_currentQuest == null)
             return;
         
@@ -325,7 +273,7 @@ export const FrontEnd = (function () {
                     }
                     else {
                         exportDialog.show();
-                        ResyncFrontendToData();
+                        //ResyncFrontendToData();
                         exportDialogTextarea.textContent = JSON.stringify(_quests, null, 4);
                     }
                     break;
@@ -358,7 +306,10 @@ export const FrontEnd = (function () {
     }
 
     return {
-        LoadQuest,
         AddEventListeners,
+        RenderQuestMenu,
+        SetCurrentQuestHTML,
+        RenderTask,
+        RenderStep,
     };
 })();

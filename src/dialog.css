@@ -13,6 +13,8 @@
     --buttonHeightMobile: 2em;
 
     --contentPadding: 1em;
+
+    --gridGap: 1em;
 }
 
 /* PARENT DIV */
@@ -56,6 +58,11 @@ dialog {
     border-radius: 1em;
     padding: 1.5em;
     overflow: visible;
+}
+
+dialog h1 {
+    text-align: center;
+    margin-top: 0;
 }
 
 /* ONBOARDING DIALOG */
@@ -113,6 +120,88 @@ button {
 }
 
 
+.settingsAvatar {
+    max-height: 30vh;
+    max-width: 30vw;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.settingsAvatar img {
+    border-radius: 50%;
+    border: 0.5em solid var(--main-color);
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.coloredBacking {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--main-color);
+    box-sizing: border-box;
+    opacity: 0.25;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+.settingsColoredSection {
+    position: relative;
+    border-radius: 1em;
+    overflow: hidden;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    grid-template-rows: repeat(3, var(--buttonHeightMobile));
+    grid-template-rows: repeat(2, 1fr);
+    aspect-ratio: 3 / 1;
+    gap: var(--gridGap);
+}
+
+.settingsColoredSection .perfectSquare {
+    grid-row: span 2;
+}
+
+.grid2x1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gridGap);
+}
+
+input[type="text"] {
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    width: 100%;
+    height: 100%;
+    border: 2px solid silver;
+    box-sizing: border-box;
+}
+
+input[type="color"] {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-width: 2px;
+    border-radius: var(--borderRadiusSmall);
+    border-color: var(--colorTextNeutral);
+    transition: var(--durationFast);
+}
+
+.nightModeButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nightModeButton img {
+    height: 100%;
+    position: absolute;
+}
+
 
 
 
@@ -145,19 +234,6 @@ form div {
 
 .SideBySide {
     gap: 1em;
-}
-
-input[type="text" i], input[type="number" i] { /*[type=text]*/
-    float: right;
-    padding: 1em;
-    border: none;
-    font-size: 17px;
-
-    border-radius: calc(var(--border-radius)/2);
-    background-color: var(--main-color-light);
-    padding-left: 1em;
-
-    width: 100%;
 }
 
 #dialogHeaderText {
