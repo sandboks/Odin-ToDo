@@ -6,7 +6,9 @@ import { Task, Step, Quest } from "./task.js";
 import { FrontEnd } from "./frontEnd.js"; // this is a bad code smell, but I don't know how to do a manual event listener in js, so I'm going to include this entire class and use it where necessary 
 import { BackEnd } from "./BackEnd.js";
 //import { DragDrop } from "./dragDrop.js";
-import testData from "./json/03.json" assert { type: "json" };
+
+import imgDark from "./img/moon-waning-crescent.svg";
+import imgLight from "./img/white-balance-sunny.svg";
 
 // DOM manipulation object 
 export const Onboarding = (function () {
@@ -18,6 +20,7 @@ export const Onboarding = (function () {
     const demoButton = document.getElementById("demoButton");
     const settingsDialog = document.getElementById("userSettingsDialog");
     const gearButton = document.getElementById("gearButton");
+    const nightModeButton = document.querySelector(".nightModeButton");
     
 
     function AddEventListeners() {
@@ -33,6 +36,10 @@ export const Onboarding = (function () {
         colorPicker.addEventListener("input", (event) => {
             let customColor = event.target.value;
             SetColor(customColor);
+        });
+
+        nightModeButton.addEventListener('click', () => {
+            ToggleNightMode();
         });
 
         gearButton.addEventListener("click", (event) => {
@@ -62,16 +69,7 @@ export const Onboarding = (function () {
 
     function LoadDemoFile() {
 
-        console.log(testData);
-        
-        //let obj = JSON.parse(testData);
-        let obj = JSON.parse(JSON.stringify(testData));
-        for (let i = 0; i < obj.length; i++) {
-            let questData = obj[i];
-            //console.log(questData);
-            BackEnd.LoadQuest(questData);
-        }
-
+        BackEnd.LoadDemoFile();
         CloseDialog(DialogFirstTime);
     }
 
@@ -88,6 +86,12 @@ export const Onboarding = (function () {
             button.style.backgroundColor = customColor;
         });
         */
+    }
+
+    function ToggleNightMode() {
+        let darkMode = BackEnd.ToggleNightMode();
+        let img = nightModeButton.querySelector("img");
+        img.src = (darkMode) ? imgDark : imgLight;
     }
 
 

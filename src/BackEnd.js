@@ -1,8 +1,10 @@
 import { Task, Step, Quest } from "./task.js";
+import { UserData } from "./UserData.js";
 import { FrontEnd } from "./frontEnd.js";
 //import { DragDrop } from "./dragDrop.js";
 
 import taskIcon from "./img/menu.svg"
+import testData from "./json/03.json" assert { type: "json" };
 
 // DOM manipulation object 
 export const BackEnd = (function () {
@@ -10,7 +12,31 @@ export const BackEnd = (function () {
     let _quests = [];
     let _currentQuest = null;
     let _questsGenerated = 0;
+    let _userData = null;
 
+    function LoadDemoFile() {
+        SetUserData("Demo User", "#F28E1C", false); //#F28E1C
+        
+        console.log(testData);
+        
+        //let obj = JSON.parse(testData);
+        let obj = JSON.parse(JSON.stringify(testData));
+        for (let i = 0; i < obj.length; i++) {
+            let questData = obj[i];
+            //console.log(questData);
+            LoadQuest(questData);
+        }
+    }
+
+    function SetUserData(name, color, darkmode) {
+        _userData = new UserData(name, color, darkmode);
+        FrontEnd.ApplyUserData(name, color, darkmode);
+    }
+
+    function ToggleNightMode() {
+        _userData.darkmode = !_userData.darkmode;
+        return _userData.darkmode;
+    }
 
     function LoadQuest(questJsonData) {
         let quest = new Quest(questJsonData.title, questJsonData._tasks, _questsGenerated++);
@@ -68,6 +94,8 @@ export const BackEnd = (function () {
 
 
     return {
+        LoadDemoFile,
+        ToggleNightMode,
         LoadQuest,
         SetCurrentQuest,
         RenameCurrentQuest,

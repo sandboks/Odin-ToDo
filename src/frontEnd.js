@@ -13,7 +13,6 @@ import taskIcon from "./img/menu.svg"
 export const FrontEnd = (function () {
 
     const TasksContainer = document.querySelector(".tasksContainer");
-    const createDialog = document.getElementById("addNewBookDialog");
     const exportDialog = document.getElementById("export");
     const exportDialogTextarea = exportDialog.querySelector("textarea");
     const NewTaskButton = document.getElementById("NewTaskButton");
@@ -25,6 +24,7 @@ export const FrontEnd = (function () {
     const rightPanel = document.querySelector(".rightPanel");
 
     const DialogBackdrop = document.querySelector(".dialogBackdrop");
+    const r = document.querySelector(':root');
 
     function AddEventListeners() {
         document.addEventListener("keypress", function(event){
@@ -46,6 +46,15 @@ export const FrontEnd = (function () {
         });
 
         rightPanel.style.display = "none";
+    }
+
+    function ApplyUserData(name, color, darkmode) {
+        r.style.setProperty('--main-color', color);
+        const colorPicker = document.getElementById("colorPicker");
+        colorPicker.value = color;
+
+        const nameEntry = document.getElementById("playerName");
+        nameEntry.value = name;
     }
 
     function GetQuestHTML(quest) {
@@ -306,6 +315,7 @@ export const FrontEnd = (function () {
     }
 
     return {
+        ApplyUserData,
         AddEventListeners,
         RenderQuestMenu,
         SetCurrentQuestHTML,
