@@ -1,24 +1,24 @@
 :root {
     --main-color: #F28E1C;
 
-    --fontDarkGrey: #2f3642;
-    --fontDarkGrey2: #464d5a;
+    --fontGrey: #2f3642;
+    --fontGrey2: #464d5a;
+
+    --fontGreyDarkMode: #cdced6;
 
     --colorOffWhite: #f1f1f1;
     --colorOffWhite2: #fafafa;
     --colorSlightGray: #e4e4e4;
-    --colorSlightGray2: #d0d0d0;
-
-    --mainContentMaxWidth: 900px;
-    --contentGridSquareWidth: 150px;
-    --menuGridSquareWidth: 220px;
 
     --main-color-selection: #ffffff36;
     --main-color-projects: #e3e8ee;
     --main-color-light: rgb(238, 238, 238);
 
-    --bg-darkmode: #3a3f47;
-    --bg-darkmode2: #2b2d30;
+    --bgLight: white;
+
+    --bg-darkmode: #404244;
+    --bg-darkmode2: #292a2c;
+    --bg-darkmode3: #4a4b50;
 
     --font-color-softer: #6c6c6c;
     --font-color-softer-dark: #cecdcd;
@@ -35,13 +35,23 @@ body {
     font-family: 'rubik', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.dialogParent.DarkMode dialog {
+    background-color: var(--bg-darkmode);
+    color: var(--fontGreyDarkMode);
+}
+
 .contentGrid {
     display: grid;
     grid-template-columns: 300px minmax(300px, 1fr);
     grid-template-rows: auto 1fr;
     height: 100vh;
-    background-color: white;
+    background-color: var(--bgLight);
     color: black;
+}
+
+.contentGrid.DarkMode {
+    background-color: var(--bg-darkmode2);
+    color: var(--colorOffWhite);
 }
 
 /*
@@ -50,15 +60,24 @@ LEFT SIDE CONTENT
 
 .leftPanel {
     background-color: var(--colorOffWhite);
-    color: var(--fontDarkGrey);
+    color: var(--fontGrey);
     overflow: hidden;
+}
+
+.contentGrid.DarkMode .leftPanel {
+    background-color: var(--bg-darkmode);
+    color: var(--fontGreyDarkMode);
+}
+
+.contentGrid.DarkMode .leftPanel img {
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(195deg) brightness(108%) contrast(104%);
 }
 
 .projectsHeader {
     display: grid;
     grid-template-columns: 1fr auto auto;
     justify-content: space-between;
-    border-bottom: solid 2px var(--fontDarkGrey);
+    border-bottom: solid 2px var(--fontGrey);
     margin: 0 0.75em;
     padding: 0.5em;
 }
@@ -82,9 +101,6 @@ MENU ROWS
 
 .questRow img, .menuRowHeader img {
     width: 24px;
-    /*
-    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(195deg) brightness(108%) contrast(104%);
-    */
 }
 
 .questRow:not(.selected) {
@@ -159,6 +175,11 @@ MENU ROWS
     opacity: 0.5;
 }
 
+.contentGrid.DarkMode .questRow:hover:not(.selected) .questRowBacking {
+    background: var(--bg-darkmode2);
+    opacity: 0.5;
+}
+
 /*
 TOP BANNER
 */
@@ -172,6 +193,10 @@ TOP BANNER
     padding: 0.5em 0;
 
     border-bottom: solid 3px var(--colorPanelBorder);
+}
+
+.contentGrid.DarkMode .topBanner {
+    border-color: var(--fontGrey);
 }
 
 .topBanner h1 {
@@ -349,6 +374,10 @@ input[type=text]#searchbar  {
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(195deg) brightness(108%) contrast(104%);
 }
 
+.contentGrid.DarkMode .roundedIconButton img {
+    filter: none;
+}
+
 .roundedIconButton:hover {
     filter: brightness(85%);
 }
@@ -435,6 +464,10 @@ Extra div that gives rounded corners to the bottom of the entire section
     padding: 0.75em 1.5em;
 }
 
+.contentGrid.DarkMode .taskBanner {
+    background-color: var(--bg-darkmode);
+}
+
 .taskBanner h3 {
     margin: 0;
 }
@@ -463,6 +496,14 @@ Extra div that gives rounded corners to the bottom of the entire section
 
 .stepRow:hover {
     background-color: var(--colorOffWhite2);
+}
+
+.contentGrid.DarkMode .stepRow {
+    background-color: var(--bg-darkmode3);
+}
+
+.contentGrid.DarkMode .stepRow:hover {
+    background-color: var(--bg-darkmode);
 }
 
 .stepRow.is-draggable {

@@ -35,6 +35,7 @@ export const BackEnd = (function () {
 
     function ToggleNightMode() {
         _userData.darkmode = !_userData.darkmode;
+        FrontEnd.ApplyDarkMode(_userData.darkmode);
         return _userData.darkmode;
     }
 

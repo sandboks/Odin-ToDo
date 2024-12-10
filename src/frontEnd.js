@@ -55,6 +55,21 @@ export const FrontEnd = (function () {
 
         const nameEntry = document.getElementById("playerName");
         nameEntry.value = name;
+
+        ApplyDarkMode(darkmode);
+    }
+
+    function ApplyDarkMode(b) {
+        let body = document.querySelector(".contentGrid");
+        let dialog = document.querySelector(".dialogParent");
+        if (b) {
+            body.classList.add("DarkMode");
+            dialog.classList.add("DarkMode");
+        }
+        else {
+            body.classList.remove("DarkMode");
+            dialog.classList.remove("DarkMode");
+        }
     }
 
     function GetQuestHTML(quest) {
@@ -316,6 +331,7 @@ export const FrontEnd = (function () {
 
     return {
         ApplyUserData,
+        ApplyDarkMode,
         AddEventListeners,
         RenderQuestMenu,
         SetCurrentQuestHTML,
