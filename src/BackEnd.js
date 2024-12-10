@@ -33,6 +33,15 @@ export const BackEnd = (function () {
         FrontEnd.ApplyUserData(name, color, darkmode);
     }
 
+    function InitiateUserData() {
+        SetUserData("", "#F28E1C", false);
+    }
+
+    function SetUserDataInput(name, color) {
+        _userData.name = name;
+        _userData.color = color;
+    }
+
     function ToggleNightMode() {
         _userData.darkmode = !_userData.darkmode;
         FrontEnd.ApplyDarkMode(_userData.darkmode);
@@ -96,6 +105,8 @@ export const BackEnd = (function () {
 
     return {
         LoadDemoFile,
+        InitiateUserData,
+        SetUserDataInput,
         ToggleNightMode,
         LoadQuest,
         SetCurrentQuest,

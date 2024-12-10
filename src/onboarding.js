@@ -17,15 +17,26 @@ export const Onboarding = (function () {
     const DialogFirstTime = document.getElementById("FirstTimePopup");
     const DialogFirstTimeCloseButton = document.querySelector("#FirstTimePopup #panelCloseButton");
     const DialogBackdrop = document.querySelector(".dialogBackdrop");
+    const newUserButton = document.getElementById("newUserButton");
     const demoButton = document.getElementById("demoButton");
     const settingsDialog = document.getElementById("userSettingsDialog");
     const gearButton = document.getElementById("gearButton");
     const nightModeButton = document.querySelector(".nightModeButton");
+    const settingsCloseButton = settingsDialog.querySelector(".closeButtonDiv");
+    const deleteAllDataButton = document.getElementById("deleteAllDataButton");
+    const createUserButton = document.getElementById("createUserButton");
     
 
     function AddEventListeners() {
         DialogFirstTimeCloseButton.addEventListener('click', () => {
+            //CloseDialog(DialogFirstTime);
+        });
+
+        newUserButton.addEventListener('click', () => {
             CloseDialog(DialogFirstTime);
+            BackEnd.InitiateUserData();
+            SetSettingsDialogToFirstTime(true);
+            ShowDialog(settingsDialog);
         });
 
         demoButton.addEventListener('click', () => {
@@ -42,11 +53,16 @@ export const Onboarding = (function () {
             ToggleNightMode();
         });
 
+        createUserButton.addEventListener('click', () => {
+            ApplySettingsPanelInput();
+            CloseDialog(settingsDialog);
+        });
+
         gearButton.addEventListener("click", (event) => {
+            SetSettingsDialogToFirstTime(false);
             ShowDialog(settingsDialog);
         });
 
-        const settingsCloseButton = settingsDialog.querySelector(".closeButtonDiv");
         settingsCloseButton.addEventListener("click", (event) => {
             CloseDialog(settingsDialog);
         });
@@ -100,6 +116,28 @@ export const Onboarding = (function () {
         settingsDialog.show();
         DialogBackdrop.style.display = "block";
         
+    }
+
+    function SetSettingsDialogToFirstTime(b) {
+        if (b) {
+            createUserButton.style.display = "block";
+            deleteAllDataButton.style.display = "none";
+            settingsCloseButton.style.display = "none";
+        }
+        else {
+            createUserButton.style.display = "none";
+            deleteAllDataButton.style.display = "block";
+            settingsCloseButton.style.display = "block";
+        }
+    }
+
+    function ApplySettingsPanelInput() {
+        let nameEntry = document.getElementById("playerName");
+        let name = nameEntry.value;
+
+        let color = colorPicker.value;
+
+        BackEnd.SetUserDataInput(name, color);
     }
 
     return {
