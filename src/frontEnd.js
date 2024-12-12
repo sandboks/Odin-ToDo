@@ -76,6 +76,7 @@ export const FrontEnd = (function () {
 
     function LoadFromUserData(_quests, _currentQuest) {
         RenderQuestMenu(_quests, _currentQuest);
+        SetCurrentQuestHTML(_currentQuest, _currentQuest);
     }
 
     function GetQuestHTML(quest) {
@@ -94,8 +95,8 @@ export const FrontEnd = (function () {
 
         // Create everything in the quest menu
         _quests.forEach((quest) => {
-            console.log(quest);
-            console.log(_currentQuest);
+            //console.log(quest);
+            //console.log(_currentQuest);
             CreateNewQuestHTML(quest);
             if (_currentQuest == quest) {
                 GetQuestHTML(_currentQuest).classList.add("selected");

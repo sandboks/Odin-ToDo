@@ -22,18 +22,20 @@ export const BackEnd = (function () {
         console.log(testData);
         
         //let obj = JSON.parse(testData);
-        //let obj = JSON.parse(JSON.stringify(testData));
-        LoadQuestsData(testData);
+        let obj = JSON.parse(JSON.stringify(testData));
+        LoadQuestsData(obj);
     }
 
     function LoadQuestsData(data) {
         console.log(data);
-        let obj = JSON.parse(data);
+        //let obj = JSON.parse(data);
+        let obj = data;
         console.log(obj);
         console.log(obj.length);
         for (let i = 0; i < obj.length; i++) {
             let questData = obj[i];
-            console.log(questData);
+            //console.log(questData);
+            
             LoadQuest(questData);
         }
     }
@@ -61,7 +63,7 @@ export const BackEnd = (function () {
     }
 
     function LoadQuest(questJsonData) {
-        let quest = new Quest(questJsonData.title, questJsonData._tasks, _questsGenerated++);
+        let quest = new Quest(questJsonData.title, questJsonData._tasks, questJsonData.myID);
 
         //console.log(quest);
 
@@ -103,6 +105,7 @@ export const BackEnd = (function () {
     }
 
     function CreateNewTask() {
+        console.log(_currentQuest);
         let task = _currentQuest.CreateNewBlankTask();
         //new Task("NEW TASK", "", "", 0);
 
@@ -145,12 +148,19 @@ export const BackEnd = (function () {
             _questsGenerated = localStorage.getItem("_questsGenerated");
             //LoadQuestsData(localStorage.getItem("_quests"));
             console.log(localStorage.getItem("_quests"));
-            _quests = JSON.parse(localStorage.getItem("_quests"));
-            console.log(_quests);
+            let _questsData = JSON.parse(localStorage.getItem("_quests"));
+            console.log(_questsData);
+
+            LoadQuestsData(_questsData);
+
+            for (let i = 0; i < _questsData.length; i++) {
+                //let quest = _questsData[i];
+            }
+            console.log(_quests)
 
             for (let i = 0; i < _quests.length; i++) {
                 let quest = _quests[i];
-                if (quest.myID = localStorage.getItem("_currentQuest")) {
+                if (quest.myID == localStorage.getItem("_currentQuest")) {
                     _currentQuest = quest;
                     console.log(_currentQuest);
                 }
