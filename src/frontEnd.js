@@ -79,7 +79,7 @@ export const FrontEnd = (function () {
     }
 
     function GetQuestHTML(quest) {
-        let s = `.questRow#q${quest.id}`;
+        let s = `.questRow#q${quest.myID}`;
         //console.log(s);
         return document.querySelector(s);
     }
@@ -115,7 +115,7 @@ export const FrontEnd = (function () {
         menuRow.addEventListener('click', () => {
             BackEnd.SetCurrentQuest(quest);
         });
-        menuRow.id = "q" + quest.id;
+        menuRow.id = "q" + quest.myID;
     }
 
     function SetCurrentQuestHTML(_currentQuest, quest) {

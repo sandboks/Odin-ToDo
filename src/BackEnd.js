@@ -80,7 +80,7 @@ export const BackEnd = (function () {
 
         FrontEnd.SetCurrentQuestHTML(_currentQuest, quest);
         _currentQuest = quest;
-        
+        SaveData();
     }
 
     function RenameCurrentQuest(newName) {
@@ -124,7 +124,7 @@ export const BackEnd = (function () {
         
         localStorage.setItem("_userData", JSON.stringify(_userData));
         localStorage.setItem("_quests", JSON.stringify(_quests));
-        localStorage.setItem("_currentQuest", (_currentQuest == null ? -1 : _currentQuest.id)); // store the ID
+        localStorage.setItem("_currentQuest", (_currentQuest == null ? -1 : _currentQuest.myID)); // store the ID
         localStorage.setItem("_questsGenerated", (_questsGenerated));
 
         console.log("SAVE COMPLETE");
@@ -150,7 +150,7 @@ export const BackEnd = (function () {
 
             for (let i = 0; i < _quests.length; i++) {
                 let quest = _quests[i];
-                if (quest.id = localStorage.getItem("_currentQuest")) {
+                if (quest.myID = localStorage.getItem("_currentQuest")) {
                     _currentQuest = quest;
                     console.log(_currentQuest);
                 }
