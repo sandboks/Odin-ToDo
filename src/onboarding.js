@@ -58,6 +58,11 @@ export const Onboarding = (function () {
             CloseDialog(settingsDialog);
         });
 
+        deleteAllDataButton.addEventListener('click', () => {
+            BackEnd.DeleteAllData();
+            //CloseDialog(settingsDialog);
+        });
+
         gearButton.addEventListener("click", (event) => {
             SetSettingsDialogToFirstTime(false);
             ShowDialog(settingsDialog);
@@ -76,6 +81,16 @@ export const Onboarding = (function () {
     function CloseDialog(dialog) {
         dialog.close();
         DialogBackdrop.style.display = "none";
+    }
+
+    function Initialize() {
+        // try loading data. If this succeeds, then don't show the popup
+        if (BackEnd.LoadData()) {
+            return;
+        }
+
+
+        ShowInitialPopup();
     }
 
     function ShowInitialPopup() {
@@ -142,7 +157,6 @@ export const Onboarding = (function () {
 
     return {
         AddEventListeners,
-        ShowInitialPopup,
-        ShowSettingsPopupDebug,
+        Initialize,
     };
 })();

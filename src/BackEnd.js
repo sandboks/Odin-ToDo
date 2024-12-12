@@ -13,17 +13,27 @@ export const BackEnd = (function () {
     let _currentQuest = null;
     let _questsGenerated = 0;
     let _userData = null;
+    let _doNotSave = false;
 
     function LoadDemoFile() {
+        _doNotSave = true;
         SetUserData("Demo User", "#F28E1C", false); //#F28E1C
         
         console.log(testData);
         
         //let obj = JSON.parse(testData);
-        let obj = JSON.parse(JSON.stringify(testData));
+        //let obj = JSON.parse(JSON.stringify(testData));
+        LoadQuestsData(testData);
+    }
+
+    function LoadQuestsData(data) {
+        console.log(data);
+        let obj = JSON.parse(data);
+        console.log(obj);
+        console.log(obj.length);
         for (let i = 0; i < obj.length; i++) {
             let questData = obj[i];
-            //console.log(questData);
+            console.log(questData);
             LoadQuest(questData);
         }
     }
@@ -38,8 +48,10 @@ export const BackEnd = (function () {
     }
 
     function SetUserDataInput(name, color) {
-        _userData.name = name;
+        _userData.username = name;
         _userData.color = color;
+
+        SaveData();
     }
 
     function ToggleNightMode() {
@@ -86,12 +98,15 @@ export const BackEnd = (function () {
         FrontEnd.RenderQuestMenu(_quests, _currentQuest);
         if (_currentQuest == null)
             SetCurrentQuest(quest);
+
+        SaveData();
     }
 
     function CreateNewTask() {
         let task = _currentQuest.CreateNewBlankTask();
         //new Task("NEW TASK", "", "", 0);
 
+        SaveData();
         FrontEnd.RenderTask(task);
         return;
         //DragDrop.AddRowListeners(newRow);
@@ -99,11 +114,67 @@ export const BackEnd = (function () {
 
     function CreateNewStep(task) {
         let step = task.GenerateNewStep("");
+        SaveData();
         FrontEnd.RenderStep(task, step, true);
+    }
+
+    function SaveData() {
+        if (_doNotSave)
+            return;
+        
+        localStorage.setItem("_userData", JSON.stringify(_userData));
+        localStorage.setItem("_quests", JSON.stringify(_quests));
+        localStorage.setItem("_currentQuest", (_currentQuest == null ? -1 : _currentQuest.id)); // store the ID
+        localStorage.setItem("_questsGenerated", (_questsGenerated));
+
+        console.log("SAVE COMPLETE");
+    }
+
+    function LoadData() {
+        let userData = JSON.parse(localStorage.getItem("_userData"));
+        console.log(userData);
+        if (userData == null)
+            return false;
+        else {
+            //console.log(userData.username);
+            SetUserData(userData.username, userData.color, userData.darkmode);
+            //_userData.username = userData.username;
+            //_userData.color = userData.color;
+            //_userData.darkmode = userData.darkmode;
+
+            _questsGenerated = localStorage.getItem("_questsGenerated");
+            //LoadQuestsData(localStorage.getItem("_quests"));
+            console.log(localStorage.getItem("_quests"));
+            _quests = JSON.parse(localStorage.getItem("_quests"));
+            console.log(_quests);
+
+            for (let i = 0; i < _quests.length; i++) {
+                let quest = _quests[i];
+                if (quest.id = localStorage.getItem("_currentQuest")) {
+                    _currentQuest = quest;
+                    console.log(_currentQuest);
+                }
+            }
+            //_currentQuest = localStorage.getItem("_currentQuest");
+            
+            FrontEnd.LoadFromUserData(_quests, _currentQuest);
+        }
+
+        return true;
+    }
+
+    function DeleteAllData() {
+        _doNotSave = true;
+        localStorage.clear();
+        // refresh the page
+        location.reload();
     }
 
 
     return {
+        LoadData,
+        SaveData,
+        DeleteAllData,
         LoadDemoFile,
         InitiateUserData,
         SetUserDataInput,

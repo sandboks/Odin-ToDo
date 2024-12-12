@@ -5,6 +5,7 @@
 
 import { Task, Step, Quest } from "./task.js";
 import { BackEnd } from "./BackEnd.js";
+import { Timer } from "./Timer.js";
 //import { DragDrop } from "./dragDrop.js";
 
 import taskIcon from "./img/menu.svg"
@@ -27,9 +28,10 @@ export const FrontEnd = (function () {
     const r = document.querySelector(':root');
 
     function AddEventListeners() {
-        document.addEventListener("keypress", function(event){
-            var x = event.key;
-            ProcessInput(x);
+        document.addEventListener("keydown", function(event){
+            //var x = event.key;
+            //DEBUGProcessInput(x);
+            Timer.SetTimer();
         });
 
         newQuestButton.addEventListener('click', () => {
@@ -72,6 +74,10 @@ export const FrontEnd = (function () {
         }
     }
 
+    function LoadFromUserData(_quests, _currentQuest) {
+        RenderQuestMenu(_quests, _currentQuest);
+    }
+
     function GetQuestHTML(quest) {
         let s = `.questRow#q${quest.id}`;
         //console.log(s);
@@ -88,6 +94,8 @@ export const FrontEnd = (function () {
 
         // Create everything in the quest menu
         _quests.forEach((quest) => {
+            console.log(quest);
+            console.log(_currentQuest);
             CreateNewQuestHTML(quest);
             if (_currentQuest == quest) {
                 GetQuestHTML(_currentQuest).classList.add("selected");
@@ -241,6 +249,7 @@ export const FrontEnd = (function () {
         task.HTMLroot.remove();
     }
 
+    // Sync the name of the task titles and the data of each step, for the current quest
     function ResyncFrontendToData(_currentQuest) {
         if (_currentQuest == null)
             return;
@@ -259,6 +268,8 @@ export const FrontEnd = (function () {
                 step.completed = checkboxes[j].checked;
             }
         }
+
+        BackEnd.SaveData();
     }
 
     function AppendDivWithClasses(parentNode, classes) {
@@ -284,7 +295,7 @@ export const FrontEnd = (function () {
 
     const specialInputs = ["Enter", "=", "c", ".", "±", "⌫",];
 
-    function ProcessInput(x) {
+    function DEBUGProcessInput(x) {
         if (specialInputs.includes(x)) {
             switch (x) {
                 case "Enter":
@@ -332,6 +343,7 @@ export const FrontEnd = (function () {
     return {
         ApplyUserData,
         ApplyDarkMode,
+        LoadFromUserData,
         AddEventListeners,
         RenderQuestMenu,
         SetCurrentQuestHTML,
