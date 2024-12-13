@@ -6,6 +6,7 @@ import { Task, Step, Quest } from "./task.js";
 import { FrontEnd } from "./frontEnd.js"; // this is a bad code smell, but I don't know how to do a manual event listener in js, so I'm going to include this entire class and use it where necessary 
 import { BackEnd } from "./BackEnd.js";
 //import { DragDrop } from "./dragDrop.js";
+import { ShuffleController } from "./Shuffle.js";
 
 import imgDark from "./img/moon-waning-crescent.svg";
 import imgLight from "./img/white-balance-sunny.svg";
@@ -23,6 +24,10 @@ export const Onboarding = (function () {
     const settingsCloseButton = settingsDialog.querySelector(".closeButtonDiv");
     const deleteAllDataButton = document.getElementById("deleteAllDataButton");
     const createUserButton = document.getElementById("createUserButton");
+    const shuffleButton = document.querySelector(".shuffleIcon");
+
+    const colorPicker = document.getElementById("colorPicker");
+    const nameEntry = document.getElementById("playerName");
     
 
     function AddEventListeners() {
@@ -38,7 +43,6 @@ export const Onboarding = (function () {
             LoadDemoFile();
         });
 
-        const colorPicker = document.getElementById("colorPicker");
         colorPicker.addEventListener("input", (event) => {
             let customColor = event.target.value;
             SetColor(customColor);
@@ -51,6 +55,10 @@ export const Onboarding = (function () {
         createUserButton.addEventListener('click', () => {
             ApplySettingsPanelInput();
             CloseDialog(settingsDialog);
+        });
+
+        shuffleButton.addEventListener('click', () => {
+            ShufflePlayerInfo();
         });
 
         deleteAllDataButton.addEventListener('click', () => {
@@ -107,16 +115,9 @@ export const Onboarding = (function () {
     
 
     function SetColor(customColor) {
-        //document.querySelector(".calcSection").style.borderColor = customColor;
         var r = document.querySelector(':root');
-
         r.style.setProperty('--main-color', customColor);
-
-        /*
-        document.querySelectorAll(".operatorButton").forEach(function(button) {
-            button.style.backgroundColor = customColor;
-        });
-        */
+        colorPicker.value = customColor;
     }
 
     function ToggleNightMode() {
@@ -125,12 +126,9 @@ export const Onboarding = (function () {
         img.src = (darkMode) ? imgDark : imgLight;
     }
 
-
-
-    function ShowSettingsPopupDebug() {
-        settingsDialog.show();
-        DialogBackdrop.style.display = "block";
-        
+    function ShufflePlayerInfo() {
+        nameEntry.value = ShuffleController.GetRandomAdj() + " " + ShuffleController.GetRandomNoun();
+        SetColor(ShuffleController.getRandomColorRGB([colorPicker.value]));
     }
 
     function SetSettingsDialogToFirstTime(b) {
@@ -147,7 +145,6 @@ export const Onboarding = (function () {
     }
 
     function ApplySettingsPanelInput() {
-        let nameEntry = document.getElementById("playerName");
         let name = nameEntry.value;
 
         let color = colorPicker.value;

@@ -15,6 +15,8 @@
     --contentPadding: 1em;
 
     --gridGap: 1em;
+
+    --imageURLshuffle: url(img/creation.svg);
 }
 
 /* PARENT DIV */
@@ -154,6 +156,9 @@ button {
     position: absolute;
 }
 
+/*
+PLAYER SETTINGS MENU
+*/
 
 .settingsAvatar {
     max-height: 30vh;
@@ -167,6 +172,38 @@ button {
     border: 0.5em solid var(--main-color);
     height: 100%;
     box-sizing: border-box;
+}
+
+.shuffleIcon {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    height: 2.5em;    
+    background: white;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border: 0px solid var(--main-color);
+    box-sizing: border-box;
+    transition: var(--durationFast);
+}
+
+.shuffleIcon:hover {
+    scale: 115%;
+    border-width: 6px;
+}
+
+.shuffleButtonGraphic {
+    width: 80%;
+    height: 80%;
+    background-image: var(--imageURLshuffle);
+    background-size: 0%;
+    mask-image: var(--imageURLshuffle);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-color: var(--main-color);
 }
 
 .coloredBacking {
