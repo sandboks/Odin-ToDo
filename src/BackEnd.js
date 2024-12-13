@@ -165,7 +165,7 @@ export const BackEnd = (function () {
 
     function LoadData() {
         let userData = JSON.parse(localStorage.getItem("_userData"));
-        console.log(userData);
+        //console.log(userData);
         if (userData == null)
             return false;
         else {
@@ -181,15 +181,9 @@ export const BackEnd = (function () {
 
 
     function LoadGivenData(userData, questsData, questsGenerated, currentQuestID) {
-        //let userData = JSON.parse(localStorage.getItem("_userData"));
-        //console.log(userData);
-        //if (userData == null)
-        //    return false;
-
         SetUserData(userData.username, userData.color, userData.darkmode);
 
-        _questsGenerated = questsGenerated; //localStorage.getItem("_questsGenerated");
-        //let _questsData = JSON.parse(localStorage.getItem("_quests"));
+        _questsGenerated = questsGenerated; 
         
         LoadQuestsData(questsData);
 
@@ -202,8 +196,6 @@ export const BackEnd = (function () {
         }
         
         FrontEnd.LoadFromUserData(_quests, _currentQuest);
-
-        //return true;
     }
 
     function DeleteAllData() {

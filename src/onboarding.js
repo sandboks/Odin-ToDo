@@ -13,9 +13,7 @@ import imgLight from "./img/white-balance-sunny.svg";
 // DOM manipulation object 
 export const Onboarding = (function () {
 
-    const TasksContainer = document.querySelector(".tasksContainer");
     const DialogFirstTime = document.getElementById("FirstTimePopup");
-    const DialogFirstTimeCloseButton = document.querySelector("#FirstTimePopup #panelCloseButton");
     const DialogBackdrop = document.querySelector(".dialogBackdrop");
     const newUserButton = document.getElementById("newUserButton");
     const demoButton = document.getElementById("demoButton");
@@ -28,9 +26,6 @@ export const Onboarding = (function () {
     
 
     function AddEventListeners() {
-        DialogFirstTimeCloseButton.addEventListener('click', () => {
-            //CloseDialog(DialogFirstTime);
-        });
 
         newUserButton.addEventListener('click', () => {
             CloseDialog(DialogFirstTime);

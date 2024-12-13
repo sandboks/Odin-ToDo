@@ -34,8 +34,6 @@ https://sandboks.github.io/Odin-ToDo/
 Last tested 13/12/24 
 
 # RETROSPECTIVE
-- The final js codebase is messier than I'd like. Having to handle things between the front end user input and the backend data is tricky.
-- My code would be a lot cleaner if I had a way to listen for and trigger custom events, but I'm not sure how to do that in js
 - I spent a lot of time thinking about the layout and design, which changed a lot as I made this
 - The project spec asked for individual checkboxes with their own "priority" and "duedate", but that wasn't intuitive to me at all. Instead I wanted big tasks broken down into a lot of smaller steps, which is how I use my own "todo lists" in my everyday life.
 
@@ -44,22 +42,16 @@ Last tested 13/12/24
 - saving and loading data to and from the browser
 
 # SELF CRITIQUE
-- the .css file is massive (1000+ lines). In future, I need to find ways to organize it better and make it more manageable
-- similarly, the main script.js file could be split into smaller pieces, to reflect the way the code is already divided into different controller "objects" that manage different parts of the logic
+- The final js codebase is messier than I'd like. Having to handle things between the front end user input and the backend data is tricky.
+- My code would be a lot cleaner if I had a way to listen for and trigger custom events, but I'm not sure how to do that in js
+- I used `"contenteditable="true"` fields for everything in this project. This was a mistake, as honestly, these fields are a MASSIVE pain. Using regular input fields seems like it would've been way nicer.
 
 # SUPERFLUOUS EXTRAS I'D LIKE TO DO IN FUTURE
-- add variable CPU difficulty
-- add an intro screen
-- add a 2nd screen where you choose the number of rounds to play?
-- update the HUD to include number of rounds won
-- dark mode
+- drag and drop functionality
 
 # CREDITS
 Material design icons:  
 https://pictogrammers.com/library/mdi/
-
-Some ideas were lifted from:  
-https://codebrainer.com/blog/tic-tac-toe-javascript-game
 
 Pokemon Mystery Dungeon sprites belong to Nintendo, ripped from here:  
 https://sprites.pmdcollab.org/

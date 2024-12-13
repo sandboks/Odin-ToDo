@@ -79,7 +79,6 @@ dialog h1 {
 }
 
 .twoGrid {
-    margin: 1em 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2em;
