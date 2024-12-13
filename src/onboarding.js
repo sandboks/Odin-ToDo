@@ -69,6 +69,7 @@ export const Onboarding = (function () {
         });
 
         settingsCloseButton.addEventListener("click", (event) => {
+            ApplySettingsPanelInput();
             CloseDialog(settingsDialog);
         });
     }

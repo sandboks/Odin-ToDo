@@ -17,13 +17,20 @@ export const BackEnd = (function () {
 
     function LoadDemoFile() {
         _doNotSave = true;
-        SetUserData("Demo User", "#F28E1C", false); //#F28E1C
+        //SetUserData("Demo User", "#F28E1C", false); //#F28E1C
         
+        let userData = new UserData("Demo user", "#F28E1C", false);
+        let questsData = JSON.parse(JSON.stringify(testData));
+        let questsGenerated = 3;
+        let currentQuestID = 0;
+
         console.log(testData);
+
+        LoadGivenData(userData, questsData, questsGenerated, currentQuestID);
         
         //let obj = JSON.parse(testData);
         let obj = JSON.parse(JSON.stringify(testData));
-        LoadQuestsData(obj);
+        //LoadQuestsData(obj);
     }
 
     function LoadQuestsData(data) {
@@ -31,7 +38,7 @@ export const BackEnd = (function () {
         //let obj = JSON.parse(data);
         let obj = data;
         console.log(obj);
-        console.log(obj.length);
+        //console.log(obj.length);
         for (let i = 0; i < obj.length; i++) {
             let questData = obj[i];
             //console.log(questData);
@@ -63,7 +70,7 @@ export const BackEnd = (function () {
     }
 
     function LoadQuest(questJsonData) {
-        let quest = new Quest(questJsonData.title, questJsonData._tasks, questJsonData.myID);
+        let quest = new Quest(questJsonData.title, questJsonData._tasks, questJsonData.id);
 
         //console.log(quest);
 
@@ -72,7 +79,7 @@ export const BackEnd = (function () {
         //CreateNewQuestHTML(quest);
 
         if (_quests.length == 1) {
-            SetCurrentQuest(quest);
+            //SetCurrentQuest(quest);
         }
     }
 
@@ -109,25 +116,27 @@ export const BackEnd = (function () {
         let task = _currentQuest.CreateNewBlankTask();
         //new Task("NEW TASK", "", "", 0);
 
-        SaveData();
         FrontEnd.RenderTask(task);
+        SaveData();
         return;
         //DragDrop.AddRowListeners(newRow);
     }
 
     function CreateNewStep(task) {
         let step = task.GenerateNewStep("");
-        SaveData();
         FrontEnd.RenderStep(task, step, true);
+        SaveData();
     }
 
     function SaveData() {
         if (_doNotSave)
             return;
         
+        FrontEnd.ResyncFrontendToData(_currentQuest);
+
         localStorage.setItem("_userData", JSON.stringify(_userData));
         localStorage.setItem("_quests", JSON.stringify(_quests));
-        localStorage.setItem("_currentQuest", (_currentQuest == null ? -1 : _currentQuest.myID)); // store the ID
+        localStorage.setItem("_currentQuest", (_currentQuest == null ? -1 : _currentQuest.id)); // store the ID
         localStorage.setItem("_questsGenerated", (_questsGenerated));
 
         console.log("SAVE COMPLETE");
@@ -139,38 +148,41 @@ export const BackEnd = (function () {
         if (userData == null)
             return false;
         else {
-            //console.log(userData.username);
-            SetUserData(userData.username, userData.color, userData.darkmode);
-            //_userData.username = userData.username;
-            //_userData.color = userData.color;
-            //_userData.darkmode = userData.darkmode;
-
-            _questsGenerated = localStorage.getItem("_questsGenerated");
-            //LoadQuestsData(localStorage.getItem("_quests"));
-            console.log(localStorage.getItem("_quests"));
-            let _questsData = JSON.parse(localStorage.getItem("_quests"));
-            console.log(_questsData);
-
-            LoadQuestsData(_questsData);
-
-            for (let i = 0; i < _questsData.length; i++) {
-                //let quest = _questsData[i];
-            }
-            console.log(_quests)
-
-            for (let i = 0; i < _quests.length; i++) {
-                let quest = _quests[i];
-                if (quest.myID == localStorage.getItem("_currentQuest")) {
-                    _currentQuest = quest;
-                    console.log(_currentQuest);
-                }
-            }
-            //_currentQuest = localStorage.getItem("_currentQuest");
-            
-            FrontEnd.LoadFromUserData(_quests, _currentQuest);
+            let questsGenerated = localStorage.getItem("_questsGenerated");
+            let questsData = JSON.parse(localStorage.getItem("_quests"));
+            let currentQuestID = localStorage.getItem("_currentQuest");
+            LoadGivenData(userData, questsData, questsGenerated, currentQuestID);
         }
 
         return true;
+    }
+
+
+
+    function LoadGivenData(userData, questsData, questsGenerated, currentQuestID) {
+        //let userData = JSON.parse(localStorage.getItem("_userData"));
+        //console.log(userData);
+        //if (userData == null)
+        //    return false;
+
+        SetUserData(userData.username, userData.color, userData.darkmode);
+
+        _questsGenerated = questsGenerated; //localStorage.getItem("_questsGenerated");
+        //let _questsData = JSON.parse(localStorage.getItem("_quests"));
+        
+        LoadQuestsData(questsData);
+
+        for (let i = 0; i < _quests.length; i++) {
+            let quest = _quests[i];
+            if (quest.id == currentQuestID) {
+                _currentQuest = quest;
+                console.log(_currentQuest);
+            }
+        }
+        
+        FrontEnd.LoadFromUserData(_quests, _currentQuest);
+
+        //return true;
     }
 
     function DeleteAllData() {

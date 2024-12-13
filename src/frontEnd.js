@@ -76,11 +76,12 @@ export const FrontEnd = (function () {
 
     function LoadFromUserData(_quests, _currentQuest) {
         RenderQuestMenu(_quests, _currentQuest);
-        SetCurrentQuestHTML(_currentQuest, _currentQuest);
+        
+        SetCurrentQuestHTML(_currentQuest, _currentQuest, true);
     }
 
     function GetQuestHTML(quest) {
-        let s = `.questRow#q${quest.myID}`;
+        let s = `.questRow#q${quest.id}`;
         //console.log(s);
         return document.querySelector(s);
     }
@@ -116,15 +117,16 @@ export const FrontEnd = (function () {
         menuRow.addEventListener('click', () => {
             BackEnd.SetCurrentQuest(quest);
         });
-        menuRow.id = "q" + quest.myID;
+        menuRow.id = "q" + quest.id;
     }
 
-    function SetCurrentQuestHTML(_currentQuest, quest) {
+    function SetCurrentQuestHTML(_currentQuest, quest, firstTime = false) {
         if (_currentQuest != null) {
             GetQuestHTML(_currentQuest).classList.remove("selected");
         }
         
-        ResyncFrontendToData(_currentQuest);
+        if (!firstTime)
+            ResyncFrontendToData(_currentQuest);
 
         _currentQuest = quest;
         let currentQuestHTML = GetQuestHTML(_currentQuest);
@@ -259,6 +261,7 @@ export const FrontEnd = (function () {
         
         for (let i = 0; i < _tasks.length; i++) {
             let task = _tasks[i];
+            console.log(task);
             task.title = task.HTMLroot.querySelector("h3").textContent;
 
             let stepTitles = task.stepsRoot.querySelectorAll(".stepTitle");
@@ -270,7 +273,7 @@ export const FrontEnd = (function () {
             }
         }
 
-        BackEnd.SaveData();
+        //BackEnd.SaveData();
     }
 
     function AppendDivWithClasses(parentNode, classes) {
@@ -346,6 +349,7 @@ export const FrontEnd = (function () {
         ApplyDarkMode,
         LoadFromUserData,
         AddEventListeners,
+        ResyncFrontendToData,
         RenderQuestMenu,
         SetCurrentQuestHTML,
         RenderTask,
