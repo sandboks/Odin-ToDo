@@ -1,51 +1,379 @@
 [
+    
     {
-        "title": "Task #1",
-        "description": "Description goes here",
-        "dueDate": "2019",
-        "priority": 0,
-        "id": 0,
-        "_steps": [
+        "title": "Odin Project \"To-Do\" list",
+        "_tasks": [
             {
+                "title": "intro screen",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
                 "id": 0,
-                "title": "Step #1",
-                "completed": true
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "add dialogue window",
+                        "completed": true
+                    },
+                    {
+                        "id": "s1",
+                        "title": "make it laid out nice",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "close button works as a placeholder for the new user stuff",
+                        "completed": true
+                    },
+                    {
+                        "id": "s5",
+                        "title": "have a button to load into a new user",
+                        "completed": true
+                    },
+                    {
+                        "id": "s3",
+                        "title": "have a button to load a demo project that won't save",
+                        "completed": true
+                    },
+                    {
+                        "id": "s4",
+                        "title": "skip this screen if user data is already present",
+                        "completed": true
+                    }
+                ],
+                "_stepsGenerated": 5,
+                "HTMLroot": {},
+                "stepsRoot": {}
             },
             {
-                "id": 1,
-                "title": "Step #2",
-                "completed": false
+                "title": "save to browser cookie",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "google how to do it",
+                        "completed": true
+                    },
+                    {
+                        "id": "s1",
+                        "title": "implement save feature using json",
+                        "completed": true
+                    },
+                    {
+                        "id": "s2",
+                        "title": "add a way to clear user settings (for testing and otherwise)",
+                        "completed": true
+                    }
+                ],
+                "_stepsGenerated": 4,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "extras",
+                "description": "",
+                "dueDate": "",
+                "priority": "",
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "drag and drop functionality for steps, tasks, quests",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "dark mode toggle",
+                        "completed": true
+                    },
+                    {
+                        "id": "s2",
+                        "title": "color picker",
+                        "completed": true
+                    }
+                ],
+                "_stepsGenerated": 3,
+                "HTMLroot": {},
+                "stepsRoot": {}
             }
         ],
-        "_stepsGenerated": 2,
-        "HTMLroot": {},
-        "stepsRoot": {}
+        "id": 2
     },
     {
-        "title": "Task #2",
-        "description": "Description goes here",
-        "dueDate": "1984",
-        "priority": 0,
-        "id": 0,
-        "_steps": [
+        "title": "Sydney trip 2024",
+        "_tasks": [
             {
+                "title": "Carry-on",
+                "description": "Description goes here",
+                "dueDate": "2019",
+                "priority": 0,
                 "id": 0,
-                "title": "Sometrhing",
-                "completed": false
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "Laptop",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "Hoodie",
+                        "completed": true
+                    },
+                    {
+                        "id": "s2",
+                        "title": "Airpods",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "Housekeys",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 4,
+                "HTMLroot": {},
+                "stepsRoot": {}
             },
             {
-                "id": 1,
-                "title": "HENLO",
-                "completed": true
+                "title": "Clothing",
+                "description": "Description goes here",
+                "dueDate": "1984",
+                "priority": 0,
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "Shirts x 4",
+                        "completed": true
+                    },
+                    {
+                        "id": "s1",
+                        "title": "Socks x 4",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "Undies x 4",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "Jeans x 1",
+                        "completed": false
+                    },
+                    {
+                        "id": "s4",
+                        "title": "Winter jacket x 1",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 5,
+                "HTMLroot": {},
+                "stepsRoot": {}
             },
             {
-                "id": 2,
-                "title": "FJKLDJSFKLDJSLFJDS",
-                "completed": false
+                "title": "Beach",
+                "description": "",
+                "dueDate": "",
+                "priority": 0,
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "Swimmers",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "Swim goggles",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "Mesh bag",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "Sports band for watch",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 4,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "Bathroom",
+                "description": "",
+                "dueDate": "",
+                "priority": 0,
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "Toothbrush",
+                        "completed": true
+                    },
+                    {
+                        "id": "s1",
+                        "title": "Toothpaste",
+                        "completed": true
+                    },
+                    {
+                        "id": "s2",
+                        "title": "Floss",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "Sunscreen",
+                        "completed": false
+                    },
+                    {
+                        "id": "s4",
+                        "title": "Cotton buds",
+                        "completed": false
+                    },
+                    {
+                        "id": "s5",
+                        "title": "Reading glasses",
+                        "completed": false
+                    },
+                    {
+                        "id": "s6",
+                        "title": "Paracetamol",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 7,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            },
+            {
+                "title": "Tech",
+                "description": "",
+                "dueDate": "",
+                "priority": 0,
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "AC wall plug",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "usbc cable",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "phone charging stand",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "watch charger",
+                        "completed": false
+                    },
+                    {
+                        "id": "s4",
+                        "title": "Nintendo Switch",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 5,
+                "HTMLroot": {},
+                "stepsRoot": {}
             }
         ],
-        "_stepsGenerated": 3,
-        "HTMLroot": {},
-        "stepsRoot": {}
+        "id": 0
+    },
+    {
+        "title": "Groceries",
+        "_tasks": [
+            {
+                "title": "Minestrone",
+                "description": "Description goes here",
+                "dueDate": "2019",
+                "priority": 0,
+                "id": 0,
+                "_steps": [
+                    {
+                        "id": "s0",
+                        "title": "celery",
+                        "completed": false
+                    },
+                    {
+                        "id": "s1",
+                        "title": "2 carrots",
+                        "completed": false
+                    },
+                    {
+                        "id": "s2",
+                        "title": "baby spinach",
+                        "completed": false
+                    },
+                    {
+                        "id": "s3",
+                        "title": "1 onion",
+                        "completed": false
+                    },
+                    {
+                        "id": "s4",
+                        "title": "garlic",
+                        "completed": false
+                    },
+                    {
+                        "id": "s5",
+                        "title": "1 zucchini",
+                        "completed": false
+                    },
+                    {
+                        "id": "s6",
+                        "title": "tomato paste",
+                        "completed": false
+                    },
+                    {
+                        "id": "s7",
+                        "title": "1 litre veggie stock",
+                        "completed": false
+                    },
+                    {
+                        "id": "s8",
+                        "title": "1 can crushed tomatoes",
+                        "completed": false
+                    },
+                    {
+                        "id": "s9",
+                        "title": "1 can cannelloni beans",
+                        "completed": false
+                    },
+                    {
+                        "id": "s10",
+                        "title": "bay leaves",
+                        "completed": false
+                    },
+                    {
+                        "id": "s11",
+                        "title": "oregano",
+                        "completed": false
+                    },
+                    {
+                        "id": "s12",
+                        "title": "thyme",
+                        "completed": false
+                    }
+                ],
+                "_stepsGenerated": 13,
+                "HTMLroot": {},
+                "stepsRoot": {}
+            }
+        ],
+        "id": 1
     }
 ]

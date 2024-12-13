@@ -200,34 +200,26 @@ export const FrontEnd = (function () {
             if (userFocus)
                 stepTitle.focus();
 
-            const closeButtonDiv = AppendDivWithClasses(newRow, ["rowCloseButtonDiv"]);
-                let deleteStepButton = AppendTag(closeButtonDiv, "button", "x", []);
-                deleteStepButton.addEventListener("click", () => {
-                    DeleteStep(task, step);
-                });
+            /*
+<div class="perfectSquare"><button class="plusButton" id="newTaskButton"><span>+</span></button></div>
+            */
 
+            let perfectSquare = AppendDivWithClasses(newRow, ["perfectSquare", "rowCloseButtonDiv"]);
+                let deleteStepButton = AppendTag(perfectSquare, "button", "", ["plusButton"]);
+                    let plusSpan = AppendTag(deleteStepButton, "span", "+", []);
+                    deleteStepButton.addEventListener("click", () => {
+                        BackEnd.DeleteStep(task, step);
+                    });
 
         return newRow;
     }
 
-    function DeleteStep(task, step) {
-        console.log(task);
-        console.log(task.StepCount());
-        if (task.StepCount() == 1) {
-            console.log("LAST STEP. DELETE ERRYTHING");
-            DeleteTask(task);
-            return;
-        }
-        
-        //let stepRoot = task.stepsRoot.querySelector("#" + step.id); //[id='1']
+    function DeleteStepHTML(task, step) {
         let stepRoot = task.stepsRoot.querySelector(`[id='${step.id}']`);
         let stepDeleteButton = stepRoot.querySelector(".rowCloseButtonDiv button");
-        //console.log(stepDeleteButton);
-        //console.log("I probably need to remove listeners here...");
 
         // this step clones the button, and in doing so, removes all eventlisteners attached to it
         RemoveAllListeners(stepDeleteButton);
-        //stepDeleteButton.replaceWith(stepDeleteButton.cloneNode(true));
         stepRoot.remove();
         task.DeleteStep(step);
     }
@@ -236,16 +228,7 @@ export const FrontEnd = (function () {
         o.replaceWith(o.cloneNode(true));
     }
 
-    function DeleteTask(task) {
-        let _tasks = _currentQuest._tasks;
-        let index = _tasks.indexOf(task); 
-        if (index == -1)
-            return;
-        
-        _tasks.splice(index, 1);
-        console.log(_tasks);
-
-
+    function DeleteTaskHTML(task) {
         let addStepButton = task.HTMLroot.querySelector("#newTaskButton");
         RemoveAllListeners(addStepButton);
         //addStepButton.replaceWith(addStepButton.cloneNode(true));
@@ -352,6 +335,8 @@ export const FrontEnd = (function () {
         ResyncFrontendToData,
         RenderQuestMenu,
         SetCurrentQuestHTML,
+        DeleteTaskHTML,
+        DeleteStepHTML,
         RenderTask,
         RenderStep,
     };

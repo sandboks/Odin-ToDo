@@ -60,9 +60,15 @@ dialog {
     overflow: visible;
 }
 
+.dialogContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 dialog h1 {
     text-align: center;
-    margin-top: 0;
+    margin: 0;
 }
 
 /* ONBOARDING DIALOG */
@@ -78,6 +84,11 @@ dialog h1 {
     grid-template-columns: 1fr 1fr;
     gap: 2em;
     height: 4em;
+}
+
+.oneGrid {
+    justify-content: center;
+    grid-template-columns: 0.5fr;
 }
 
 button {

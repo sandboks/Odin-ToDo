@@ -28,6 +28,8 @@
 
     --navigationBarHeight: 4.5em;
     --transition-time: .2s;
+
+    --questRowHeight: 3.2em;
 }
 
 body {
@@ -80,6 +82,10 @@ LEFT SIDE CONTENT
     border-bottom: solid 2px var(--fontGrey);
     margin: 0 0.75em;
     padding: 0.5em;
+
+    height: var(--questRowHeight);
+    box-sizing: border-box;
+    align-items: center;
 }
 
 .leftPanel h2 {
@@ -112,7 +118,7 @@ MENU ROWS
 }
 
 .questRow {
-    height: 60px;
+    height: var(--questRowHeight);
 }
 
 .questRow {
@@ -120,6 +126,8 @@ MENU ROWS
 
     border-left: 0em solid transparent;
     position: relative;
+    align-items: center;
+    display: flex;
 }
 
 .questRow:hover{
@@ -462,6 +470,9 @@ Extra div that gives rounded corners to the bottom of the entire section
     border-radius: 1em 1em 0 0;
     overflow: hidden;
     padding: 0.75em 1.5em;
+
+    height: var(--questRowHeight);
+    box-sizing: border-box;
 }
 
 .contentGrid.DarkMode .taskBanner {
@@ -491,7 +502,7 @@ Extra div that gives rounded corners to the bottom of the entire section
 
     transition: 50ms;
 
-    height: 3.2em;
+    height: var(--questRowHeight);
 }
 
 .stepRow:hover {
@@ -534,7 +545,9 @@ input:checked{
 }
 
 .rowCloseButtonDiv button {
-    aspect-ratio: 1 / 1;
+    transform: rotate(45deg);
+    color: rgba(255, 0, 0, 0.5);
+    border-color: rgba(255, 0, 0, 0.5);
 }
 
 .rowCloseButtonDiv {
@@ -571,8 +584,14 @@ input:checked{
     cursor: pointer;
 }
 
-.plusButton:hover {
+.plusButton:hover, #NewTaskButton:hover {
     background: darkgray;
+}
+
+.rowCloseButtonDiv button:hover {
+    color: red;
+    border-color: red;
+    background: rgba(255, 0, 0, 0.25);
 }
 
 .rotated {

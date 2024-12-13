@@ -4,7 +4,7 @@ import { FrontEnd } from "./frontEnd.js";
 //import { DragDrop } from "./dragDrop.js";
 
 import taskIcon from "./img/menu.svg"
-import testData from "./json/03.json" assert { type: "json" };
+import testData from "./json/00.json" assert { type: "json" };
 
 // DOM manipulation object 
 export const BackEnd = (function () {
@@ -128,6 +128,27 @@ export const BackEnd = (function () {
         SaveData();
     }
 
+    function DeleteStep(task, step) {
+        if (task.StepCount() == 1) {
+            console.log("LAST STEP. DELETE ERRYTHING");
+            DeleteTask(task);
+            return;
+        }
+        FrontEnd.DeleteStepHTML(task, step);
+    }
+
+    function DeleteTask(task) {
+        let _tasks = _currentQuest._tasks;
+        let index = _tasks.indexOf(task); 
+        if (index == -1)
+            return;
+        
+        _tasks.splice(index, 1);
+        //console.log(_tasks);
+
+        FrontEnd.DeleteTaskHTML(task);
+    }
+
     function SaveData() {
         if (_doNotSave)
             return;
@@ -207,5 +228,6 @@ export const BackEnd = (function () {
         CreateNewQuest,
         CreateNewTask,
         CreateNewStep,
+        DeleteStep,
     };
 })();
