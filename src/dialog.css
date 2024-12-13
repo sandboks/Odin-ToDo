@@ -66,9 +66,18 @@ dialog {
     gap: 1em;
 }
 
+.dialogContent p {
+    margin: 0;
+}
+
 dialog h1 {
     text-align: center;
     margin: 0;
+}
+
+dialog ul {
+    margin: 0;
+    text-align: left;
 }
 
 /* ONBOARDING DIALOG */
@@ -88,6 +97,22 @@ dialog h1 {
 .oneGrid {
     justify-content: center;
     grid-template-columns: 0.5fr;
+}
+
+.githubFooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.githubFooter p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 button {
