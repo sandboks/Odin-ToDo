@@ -11,15 +11,32 @@
     -->
     <div class="dialogParent">
         <dialog id="FirstTimePopup">
-            <p>Welcome to SideQuest!</p>
-            <p>Please choose an option:</p>
-            <div class="twoGrid">
-                    <button class="thickButton" id="newUserButton">
-                        <span>New User</span>
-                    </button>
-                    <button class="thickButton" id="demoButton">
-                        <span>Demo mode</span>
-                    </button>
+            <div class="dialogContent">
+                <h2>Welcome to SideQuest!</h2>
+                <p>Please choose an option:</p>
+                <ul>
+                    <li>New User:<ul>
+                        <li>Create a new profile</li>
+                    </ul></li>
+                    <li>Demo Mode:<ul>
+                        <li>Preload with demo content</li>
+                        <li>Data will not be saved</li>
+                    </ul></li>
+                </ul>
+                <div class="twoGrid">
+                        <button class="thickButton" id="newUserButton">
+                            <span>New User</span>
+                        </button>
+                        <button class="thickButton" id="demoButton">
+                            <span>Demo Mode</span>
+                        </button>
+                </div>
+                <a href="https://github.com/sandboks/Odin-ToDo">
+                    <div class="githubFooter">
+                        <p>created by @sandboks</p>
+                        <img src="6fa18895f6e6c7772cab.svg" class="buttonImage">
+                    </div>
+                </a>    
             </div>
         </dialog>
         <dialog id="export">
