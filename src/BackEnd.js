@@ -34,10 +34,10 @@ export const BackEnd = (function () {
     }
 
     function LoadQuestsData(data) {
-        console.log(data);
+        //console.log(data);
         //let obj = JSON.parse(data);
         let obj = data;
-        console.log(obj);
+        //console.log(obj);
         //console.log(obj.length);
         for (let i = 0; i < obj.length; i++) {
             let questData = obj[i];
@@ -112,7 +112,7 @@ export const BackEnd = (function () {
     }
 
     function CreateNewTask() {
-        console.log(_currentQuest);
+        //console.log(_currentQuest);
         let task = _currentQuest.CreateNewBlankTask();
         //new Task("NEW TASK", "", "", 0);
 
@@ -191,7 +191,7 @@ export const BackEnd = (function () {
             let quest = _quests[i];
             if (quest.id == currentQuestID) {
                 _currentQuest = quest;
-                console.log(_currentQuest);
+                //console.log(_currentQuest);
             }
         }
         

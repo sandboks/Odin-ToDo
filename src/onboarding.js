@@ -54,8 +54,12 @@ export const Onboarding = (function () {
         });
 
         deleteAllDataButton.addEventListener('click', () => {
-            BackEnd.DeleteAllData();
-            //CloseDialog(settingsDialog);
+            if (confirm('This will permanently delete all of your user data. Are you sure you want to proceed?')) {
+                // Delete it
+                BackEnd.DeleteAllData();
+              } else {
+                // Do nothing!
+              }
         });
 
         gearButton.addEventListener("click", (event) => {

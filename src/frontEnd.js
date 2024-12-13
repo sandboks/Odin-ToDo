@@ -244,7 +244,7 @@ export const FrontEnd = (function () {
         
         for (let i = 0; i < _tasks.length; i++) {
             let task = _tasks[i];
-            console.log(task);
+            //console.log(task);
             task.title = task.HTMLroot.querySelector("h3").textContent;
 
             let stepTitles = task.stepsRoot.querySelectorAll(".stepTitle");
