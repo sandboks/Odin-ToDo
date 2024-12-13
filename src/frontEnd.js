@@ -81,6 +81,9 @@ export const FrontEnd = (function () {
     }
 
     function GetQuestHTML(quest) {
+        if (quest == null)
+            return null;
+        
         let s = `.questRow#q${quest.id}`;
         //console.log(s);
         return document.querySelector(s);
@@ -129,6 +132,9 @@ export const FrontEnd = (function () {
             ResyncFrontendToData(_currentQuest);
 
         _currentQuest = quest;
+        if (_currentQuest == null)
+            return;
+
         let currentQuestHTML = GetQuestHTML(_currentQuest);
         currentQuestHTML.classList.add("selected");
         RenderQuest(quest);

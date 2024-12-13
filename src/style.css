@@ -497,6 +497,8 @@ Extra div that gives rounded corners to the bottom of the entire section
 
 .taskBanner h3 {
     margin: 0;
+    overflow: hidden;
+    display: flex;
 }
 
 #newTaskButton {
@@ -510,7 +512,6 @@ Extra div that gives rounded corners to the bottom of the entire section
     gap: 1em;
     padding: 0.75em 1.5em;
     background-color: var(--colorOffWhite);
-    align-items: center;
 
     cursor: pointer;
     user-select: none;
@@ -519,6 +520,7 @@ Extra div that gives rounded corners to the bottom of the entire section
     transition: 50ms;
 
     height: var(--questRowHeight);
+    overflow: hidden;
 }
 
 .stepRow:hover {

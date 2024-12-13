@@ -135,6 +135,7 @@ export const BackEnd = (function () {
             return;
         }
         FrontEnd.DeleteStepHTML(task, step);
+        SaveData();
     }
 
     function DeleteTask(task) {
