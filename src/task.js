@@ -6,6 +6,8 @@ export class Quest {
     title = "";
     _tasks = [];
     id = 0;
+    priority = 0;
+    date = "";
 
     constructor(title, _tasks = [], id = 0) {
         this.title = title;

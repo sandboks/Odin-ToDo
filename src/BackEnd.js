@@ -1,6 +1,7 @@
 import { Task, Step, Quest } from "./task.js";
 import { UserData } from "./UserData.js";
 import { FrontEnd } from "./frontEnd.js";
+import { Onboarding } from "./onboarding.js";
 //import { DragDrop } from "./dragDrop.js";
 
 import taskIcon from "./img/menu.svg"
@@ -101,8 +102,8 @@ export const BackEnd = (function () {
 
 
 
-    function CreateNewQuest() {
-        let quest = new Quest("NEW QUEST", [], _questsGenerated++);
+    function CreateNewQuest(quest) {
+        //let quest = new Quest("NEW QUEST", [], _questsGenerated++);
         _quests.push(quest);
         FrontEnd.RenderQuestMenu(_quests, _currentQuest);
         if (_currentQuest == null)
@@ -206,6 +207,25 @@ export const BackEnd = (function () {
         location.reload();
     }
 
+    function PromptForNewQuest() {
+        Onboarding.LaunchEditQuestWindow("", 0, "", true);
+    }
+
+    function SaveQuestData(questName, questDate, questPriority, newQuest = false) {
+        let quest = _currentQuest;
+        if (newQuest) {
+            quest = new Quest("NEW QUEST", [], _questsGenerated++);
+        }
+
+        quest.title = questName;
+        quest.date = questDate;
+        quest.priority = questPriority;
+
+        if (newQuest) {
+            CreateNewQuest(quest);
+        }
+    }
+
 
     return {
         LoadData,
@@ -222,5 +242,7 @@ export const BackEnd = (function () {
         CreateNewTask,
         CreateNewStep,
         DeleteStep,
+        PromptForNewQuest,
+        SaveQuestData,
     };
 })();

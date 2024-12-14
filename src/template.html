@@ -11,6 +11,7 @@
     DIALOGUE
     -->
     <div class="dialogParent">
+        <!-- FIRST TIME POPUP -->
         <dialog id="FirstTimePopup">
             <div class="dialogContent">
                 <h1>Welcome to SideQuest!</h1>
@@ -50,7 +51,7 @@
                 <textarea name="exportBox" placeholder="exportBox"></textarea>
             </div>
         </dialog>
-
+        <!-- USER SETTINGS POPUP -->
         <dialog id="userSettingsDialog">
             <div class="closeButtonDiv">
                 <button id="panelCloseButton">
@@ -85,7 +86,41 @@
             </div>
             
         </dialog>
+        <!-- NEW QUEST / EDIT QUEST POPUP -->
+        <dialog id="EditQuestDialog">
+            <div class="closeButtonDiv">
+                <button id="panelCloseButton">
+                    <span>+</span>
+                </button>
+            </div>
+            <div class="dialogContent">
+                <h1>Edit Quest</h1>
+                <div class="twoGrid">
+                    <span>Title:</span>
+                    <input type="text" id="questName" minlength="0" maxlength="32">
+                </div>
+                <div class="twoGrid">
+                    <div class="edit-popup__date-title">
+                        <span>Due Date:</span>
+                    </div>
+                    <input type="date" id="questDate" required="">
+                </div>
+                <div class="twoGrid">
+                    <span>Priority:</span>
+                    <select name="priority" id="questPriority">
+                        <option value="0">⚪ - 0</option>
+                        <option value="1">🟢 - 1</option>
+                        <option value="2">🟡 - 2</option>
+                        <option value="3">🔴 - 3</option>
+                    </select>
+                </div>
+                <div class="twoGrid oneGrid">
+                    <button class="thickButton" id="CreateQuestButton">Create</button>
+                </div>
+            </div>
+        </dialog>
 
+        <!-- DIALOG BACKDROP -->
         <div class="dialogBackdrop"></div>
     </div>
     <!--

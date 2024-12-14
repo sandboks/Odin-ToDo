@@ -35,7 +35,8 @@ export const FrontEnd = (function () {
         });
 
         newQuestButton.addEventListener('click', () => {
-            BackEnd.CreateNewQuest();
+            BackEnd.PromptForNewQuest();
+            //BackEnd.CreateNewQuest();
         });
 
         NewTaskButton.addEventListener('click', () => {

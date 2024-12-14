@@ -512,6 +512,7 @@ Extra div that gives rounded corners to the bottom of the entire section
     gap: 1em;
     padding: 0.75em 1.5em;
     background-color: var(--colorOffWhite);
+    align-items: center;
 
     cursor: pointer;
     user-select: none;

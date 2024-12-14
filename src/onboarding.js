@@ -26,6 +26,10 @@ export const Onboarding = (function () {
     const createUserButton = document.getElementById("createUserButton");
     const shuffleButton = document.querySelector(".shuffleIcon");
 
+    const EditQuestDialog = document.getElementById("EditQuestDialog");
+    const CreateQuestButton = document.getElementById("CreateQuestButton");
+    let _creatingNewQuest = false;
+
     const colorPicker = document.getElementById("colorPicker");
     const nameEntry = document.getElementById("playerName");
     
@@ -78,6 +82,10 @@ export const Onboarding = (function () {
         settingsCloseButton.addEventListener("click", (event) => {
             ApplySettingsPanelInput();
             CloseDialog(settingsDialog);
+        });
+
+        CreateQuestButton.addEventListener("click", (event) => {
+            SaveQuestData();
         });
     }
 
@@ -152,8 +160,24 @@ export const Onboarding = (function () {
         BackEnd.SetUserDataInput(name, color);
     }
 
+    function LaunchEditQuestWindow(name = "", priority = 0, duedate = "", CreatingNewQuest = false) {
+        _creatingNewQuest = CreatingNewQuest;
+        console.log("todo: apply changes to text here based on new or edit");
+        ShowDialog(EditQuestDialog);
+    }
+
+    function SaveQuestData() {
+        let questNameEntry = document.getElementById("questName");
+        let dateEntry = document.getElementById("questDate");
+        let priorityEntry = document.getElementById("questPriority");
+
+        BackEnd.SaveQuestData(questNameEntry.value, dateEntry.value, priorityEntry.value, _creatingNewQuest);
+        CloseDialog(EditQuestDialog);
+    }
+
     return {
         AddEventListeners,
         Initialize,
+        LaunchEditQuestWindow,
     };
 })();
