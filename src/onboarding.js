@@ -30,6 +30,11 @@ export const Onboarding = (function () {
     const CreateQuestButton = document.getElementById("CreateQuestButton");
     let _creatingNewQuest = false;
 
+
+    const questNameEntry = document.getElementById("questName");
+    const dateEntry = document.getElementById("questDate");
+    const priorityEntry = document.getElementById("questPriority");
+
     const colorPicker = document.getElementById("colorPicker");
     const nameEntry = document.getElementById("playerName");
     
@@ -161,16 +166,19 @@ export const Onboarding = (function () {
     }
 
     function LaunchEditQuestWindow(name = "", priority = 0, duedate = "", CreatingNewQuest = false) {
+        let header = EditQuestDialog.querySelector("h1");
+        header.textContent = (CreatingNewQuest) ? "New Quest" : "Edit Quest";
+        CreateQuestButton.textContent = (CreatingNewQuest) ? "Create" : "Save";
+        
         _creatingNewQuest = CreatingNewQuest;
-        console.log("todo: apply changes to text here based on new or edit");
+        questNameEntry.value = name;
+        dateEntry.value = duedate;
+        priorityEntry.value = priority;
+
         ShowDialog(EditQuestDialog);
     }
 
     function SaveQuestData() {
-        let questNameEntry = document.getElementById("questName");
-        let dateEntry = document.getElementById("questDate");
-        let priorityEntry = document.getElementById("questPriority");
-
         BackEnd.SaveQuestData(questNameEntry.value, dateEntry.value, priorityEntry.value, _creatingNewQuest);
         CloseDialog(EditQuestDialog);
     }

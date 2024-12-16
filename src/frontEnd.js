@@ -8,7 +8,9 @@ import { BackEnd } from "./BackEnd.js";
 import { Timer } from "./Timer.js";
 //import { DragDrop } from "./dragDrop.js";
 
-import taskIcon from "./img/menu.svg"
+import taskIcon from "./img/menu.svg";
+import gearIcon from "./img/cog.svg";
+import { Onboarding } from "./onboarding.js";
 
 // DOM manipulation object 
 export const FrontEnd = (function () {
@@ -107,6 +109,10 @@ export const FrontEnd = (function () {
                 GetQuestHTML(_currentQuest).classList.add("selected");
             }
         });
+
+        if (_currentQuest != null) {
+            questHeaderText.textContent = _currentQuest.title;
+        }
     }
 
     function CreateNewQuestHTML(quest) {
@@ -116,10 +122,16 @@ export const FrontEnd = (function () {
                     // add the img src here
                     icon.src = taskIcon;
                 let title = AppendTag(menuRowContents, "h3", quest.title);
+                let space = AppendDivWithClasses(menuRowContents, []);
+            let settingsIcon = AppendTag(menuRow, "img", "", ["gearIcon"]);
+                settingsIcon.src = gearIcon;
             let coloredBacking = AppendDivWithClasses(menuRow, ["questRowBacking"]);
 
         menuRow.addEventListener('click', () => {
             BackEnd.SetCurrentQuest(quest);
+        });
+        settingsIcon.addEventListener('click', () => {
+            BackEnd.PromptToEditCurrentQuest();
         });
         menuRow.id = "q" + quest.id;
     }

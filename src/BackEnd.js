@@ -71,7 +71,7 @@ export const BackEnd = (function () {
     }
 
     function LoadQuest(questJsonData) {
-        let quest = new Quest(questJsonData.title, questJsonData._tasks, questJsonData.id);
+        let quest = new Quest(questJsonData.title, questJsonData._tasks, questJsonData.id, questJsonData.priority, questJsonData.date);
 
         //console.log(quest);
 
@@ -211,19 +211,28 @@ export const BackEnd = (function () {
         Onboarding.LaunchEditQuestWindow("", 0, "", true);
     }
 
+    function PromptToEditCurrentQuest() {
+        Onboarding.LaunchEditQuestWindow(_currentQuest.title, _currentQuest.priority, _currentQuest.date, false);
+        console.log(_currentQuest);
+    }
+
     function SaveQuestData(questName, questDate, questPriority, newQuest = false) {
         let quest = _currentQuest;
         if (newQuest) {
             quest = new Quest("NEW QUEST", [], _questsGenerated++);
         }
 
-        quest.title = questName;
         quest.date = questDate;
         quest.priority = questPriority;
+        RenameCurrentQuest(questName);
+
+        //console.log(quest);
 
         if (newQuest) {
             CreateNewQuest(quest);
         }
+
+        SaveData();
     }
 
 
@@ -243,6 +252,7 @@ export const BackEnd = (function () {
         CreateNewStep,
         DeleteStep,
         PromptForNewQuest,
+        PromptToEditCurrentQuest,
         SaveQuestData,
     };
 })();

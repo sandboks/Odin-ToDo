@@ -9,9 +9,11 @@ export class Quest {
     priority = 0;
     date = "";
 
-    constructor(title, _tasks = [], id = 0) {
+    constructor(title, _tasks = [], id = 0, priority = 0, date = "") {
         this.title = title;
         this.id = id;
+        this.priority = priority;
+        this.date = date;
         _tasks.forEach((data) => {
             let task = new Task(data.title, data.description, data.dueDate, data.priority, data.id);
             data._steps.forEach((step) => {
