@@ -113,6 +113,9 @@ export const FrontEnd = (function () {
         if (_currentQuest != null) {
             questHeaderText.textContent = _currentQuest.title;
         }
+        else {
+            rightPanel.style.display = "none";
+        }
     }
 
     function CreateNewQuestHTML(quest) {
@@ -121,10 +124,12 @@ export const FrontEnd = (function () {
                 let icon = AppendTag(menuRowContents, "img");
                     // add the img src here
                     icon.src = taskIcon;
+                    icon.setAttribute('draggable', false);
                 let title = AppendTag(menuRowContents, "h3", quest.title);
                 let space = AppendDivWithClasses(menuRowContents, []);
             let settingsIcon = AppendTag(menuRow, "img", "", ["gearIcon"]);
                 settingsIcon.src = gearIcon;
+                settingsIcon.setAttribute('draggable', false);
             let coloredBacking = AppendDivWithClasses(menuRow, ["questRowBacking"]);
 
         menuRow.addEventListener('click', () => {
@@ -174,7 +179,7 @@ export const FrontEnd = (function () {
         questBanner.querySelector("h2").textContent = quest.title;
     }
 
-    function RenderTask(task) {
+    function RenderTask(task, firstStep = null) {
         let newTask = AppendDivWithClasses(TasksContainer, ["TaskContainerRounded"]);
             let taskBanner = AppendDivWithClasses(newTask, ["taskBanner"]);
                 let bannerText = AppendTag(taskBanner, "h3", task.title, []);
@@ -200,7 +205,12 @@ export const FrontEnd = (function () {
             BackEnd.CreateNewStep(task);
         });
 
-        task._steps.forEach((step) => RenderStep(task, step)); 
+        if (firstStep != null) {
+            RenderStep(task, firstStep, true);
+        }
+        else {
+            task._steps.forEach((step) => RenderStep(task, step)); 
+        }
     }
 
     function RenderStep(task, step, userFocus) {

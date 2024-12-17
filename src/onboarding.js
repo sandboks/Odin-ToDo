@@ -27,8 +27,11 @@ export const Onboarding = (function () {
     const shuffleButton = document.querySelector(".shuffleIcon");
 
     const EditQuestDialog = document.getElementById("EditQuestDialog");
+    const buttonsSection = document.getElementById("buttonsSection");
     const CreateQuestButton = document.getElementById("CreateQuestButton");
+    const DeleteQuestButton = document.getElementById("DeleteQuestButton");
     let _creatingNewQuest = false;
+    const EditQuestDialogCloseButton = EditQuestDialog.querySelector("button");
 
 
     const questNameEntry = document.getElementById("questName");
@@ -74,9 +77,9 @@ export const Onboarding = (function () {
             if (confirm('This will permanently delete all of your user data. Are you sure you want to proceed?')) {
                 // Delete it
                 BackEnd.DeleteAllData();
-              } else {
+            } else {
                 // Do nothing!
-              }
+            }
         });
 
         gearButton.addEventListener("click", (event) => {
@@ -91,6 +94,20 @@ export const Onboarding = (function () {
 
         CreateQuestButton.addEventListener("click", (event) => {
             SaveQuestData();
+        });
+
+        DeleteQuestButton.addEventListener("click", (event) => {
+            if (confirm('Delete this quest?')) {
+                // Delete it
+                BackEnd.DeleteCurrentQuest();
+                CloseDialog(EditQuestDialog);
+            } else {
+                // Do nothing!
+            }
+        });
+
+        EditQuestDialogCloseButton.addEventListener("click", (event) => {
+            CloseDialog(EditQuestDialog);
         });
     }
 
@@ -149,6 +166,7 @@ export const Onboarding = (function () {
             createUserButton.style.display = "block";
             deleteAllDataButton.style.display = "none";
             settingsCloseButton.style.display = "none";
+            ShufflePlayerInfo();
         }
         else {
             createUserButton.style.display = "none";
@@ -169,6 +187,13 @@ export const Onboarding = (function () {
         let header = EditQuestDialog.querySelector("h1");
         header.textContent = (CreatingNewQuest) ? "New Quest" : "Edit Quest";
         CreateQuestButton.textContent = (CreatingNewQuest) ? "Create" : "Save";
+        DeleteQuestButton.style.display = (CreatingNewQuest) ? "None" : "Block";
+        if (!CreatingNewQuest) {
+            buttonsSection.classList.remove("oneGrid");
+        }
+        else {
+            buttonsSection.classList.add("oneGrid");
+        }
         
         _creatingNewQuest = CreatingNewQuest;
         questNameEntry.value = name;

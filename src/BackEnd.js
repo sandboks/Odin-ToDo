@@ -94,6 +94,8 @@ export const BackEnd = (function () {
     }
 
     function RenameCurrentQuest(newName) {
+        if (_currentQuest == null)
+            return;
         if (_currentQuest.title != newName) {
             _currentQuest.title = newName;
             FrontEnd.RenderQuestMenu(_quests, _currentQuest);
@@ -117,7 +119,7 @@ export const BackEnd = (function () {
         let task = _currentQuest.CreateNewBlankTask();
         //new Task("NEW TASK", "", "", 0);
 
-        FrontEnd.RenderTask(task);
+        FrontEnd.RenderTask(task, task._steps[0]);
         SaveData();
         return;
         //DragDrop.AddRowListeners(newRow);
@@ -224,14 +226,27 @@ export const BackEnd = (function () {
 
         quest.date = questDate;
         quest.priority = questPriority;
-        RenameCurrentQuest(questName);
+        quest.name = questName;
 
         //console.log(quest);
 
         if (newQuest) {
             CreateNewQuest(quest);
         }
+        else {
+            RenameCurrentQuest(questName);
+        }
 
+        SaveData();
+    }
+
+    function DeleteCurrentQuest() {
+        const index = _quests.indexOf(_currentQuest);
+        if (index > -1) { // only splice array when item is found
+            _quests.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        _currentQuest = null;
+        FrontEnd.RenderQuestMenu(_quests, _currentQuest);
         SaveData();
     }
 
@@ -254,5 +269,6 @@ export const BackEnd = (function () {
         PromptForNewQuest,
         PromptToEditCurrentQuest,
         SaveQuestData,
+        DeleteCurrentQuest,
     };
 })();
