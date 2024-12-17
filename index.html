@@ -79,8 +79,10 @@
                     </div>
                     <div class="coloredBacking"></div>
                 </div>
-                <div class="twoGrid oneGrid">
-                    <button class="thickButton" id="deleteAllDataButton">Delete all data</button>
+                <div class="twoGridShort oneGrid">
+                    <button class="thickButton" id="deleteAllDataButton">
+                        <span>Delete all data</span>
+                    </button>
                     <button class="thickButton" id="createUserButton">Create User</button>
                 </div>
             </div>
@@ -95,18 +97,9 @@
             </div>
             <div class="dialogContent">
                 <h1>Edit Quest</h1>
-                <div class="twoGrid">
-                    <span>Title:</span>
-                    <input type="text" id="questName" minlength="0" maxlength="32">
-                </div>
-                <div class="twoGrid">
-                    <div class="edit-popup__date-title">
-                        <span>Due Date:</span>
-                    </div>
+                <input type="text" id="questName" minlength="0" maxlength="32" placeholder="quest title">
+                <div class="twoGridShort">
                     <input type="date" id="questDate" required="">
-                </div>
-                <div class="twoGrid">
-                    <span>Priority:</span>
                     <select name="priority" id="questPriority">
                         <option value="0">⚪ - 0</option>
                         <option value="1">🟢 - 1</option>
