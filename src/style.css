@@ -284,20 +284,6 @@ TOP BANNER
     padding-left: var(--padding-amount);
 }
 
-input[type=text]#searchbar  {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-
-    border-radius: var(--border-radius);
-    background-color: var(--main-color-light);
-    padding-left: 1em;
-    margin: 0;
-}
-
 .topBannerHeaderDark input[type=text] {
     background-color: var(--bg-darkmode2);
     color: var(--font-color-softer-dark);

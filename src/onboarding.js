@@ -170,7 +170,7 @@ export const Onboarding = (function () {
         }
         else {
             createUserButton.style.display = "none";
-            deleteAllDataButton.style.display = "block";
+            deleteAllDataButton.style.display = "flex";
             settingsCloseButton.style.display = "block";
         }
     }

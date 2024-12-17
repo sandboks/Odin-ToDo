@@ -90,11 +90,15 @@ dialog ul {
     text-align: center;
 }
 
-.twoGrid {
+.twoGrid, .twoGridShort {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2em;
     height: 4em;
+}
+
+.twoGridShort {
+    height: 2em;
 }
 
 .oneGrid {
@@ -226,17 +230,19 @@ PLAYER SETTINGS MENU
     padding: 1em;
     display: grid;
     grid-template-columns: 0.5fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-rows: repeat(3, var(--buttonHeightMobile));
     grid-template-rows: repeat(2, 1fr);
-    /*
     aspect-ratio: 3 / 1;
+    /*
     */
     gap: var(--gridGap);
 }
 
 .settingsColoredSection .perfectSquare {
     grid-row: span 2;
+}
+
+.settingsColoredSection input[type="text"] {
+    background-color: white;
 }
 
 .grid2x1 {
@@ -247,15 +253,13 @@ PLAYER SETTINGS MENU
 
 input[type="text"] {
     padding: 1em;
-    font-size: 1em;
-    border-radius: 0.5em;
-    width: 100%;
-    height: 100%;
-    border: 2px solid silver;
-    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    border-radius: calc(var(--border-radius) / 2);
+    background-color: var(--main-color-light);
+    padding-left: 1em;
 
-    padding: 0 1em;
-    font-size: x-large;
+    padding-left: 1em;
 
     /*
     background-image: var(--userImg);
