@@ -163,7 +163,7 @@ export const Onboarding = (function () {
 
     function SetSettingsDialogToFirstTime(b) {
         if (b) {
-            createUserButton.style.display = "block";
+            createUserButton.style.display = "flex";
             deleteAllDataButton.style.display = "none";
             settingsCloseButton.style.display = "none";
             ShufflePlayerInfo();

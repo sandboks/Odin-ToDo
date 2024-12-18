@@ -1,16 +1,3 @@
-# Odin-ToDo
-https://www.theodinproject.com/lessons/node-path-javascript-todo-list
-
-# TODO:
-- draggable reordering EVERYTHING (https://tahazsh.com/blog/seamless-ui-with-js-drag-to-reorder-example/#the-example-we-will-build)
-- press enter to create a new step select it, for faster input
-- pin the navigation so it's always at the top of the screen
-- add drag and drop to everything
-- due dates and priority for quests
-- delete quests
-
-
-
 # ACCESS HERE:
 https://sandboks.github.io/Odin-ToDo/
 
@@ -27,11 +14,8 @@ https://sandboks.github.io/Odin-ToDo/
 
 # COMBATIBILITY
 - ✅ Google Chrome (desktop)
-- ? Firefox (desktop)
-- ? Safari (desktop)
-- ? Safari (iOS)
 
-Last tested 13/12/24 
+Last tested 18/12/24 
 
 # RETROSPECTIVE
 - I spent a lot of time thinking about the layout and design, which changed a lot as I made this
@@ -52,9 +36,3 @@ Last tested 13/12/24
 # CREDITS
 Material design icons:  
 https://pictogrammers.com/library/mdi/
-
-Pokemon Mystery Dungeon sprites belong to Nintendo, ripped from here:  
-https://sprites.pmdcollab.org/
-
-Some avatars created as fanart by Twitter user Ernmuffin:  
-https://x.com/Ernmuffin

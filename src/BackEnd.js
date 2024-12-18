@@ -220,8 +220,11 @@ export const BackEnd = (function () {
 
     function SaveQuestData(questName, questDate, questPriority, newQuest = false) {
         let quest = _currentQuest;
+        if (questName == "") {
+            questName = "NEW QUEST";
+        }
         if (newQuest) {
-            quest = new Quest("NEW QUEST", [], _questsGenerated++);
+            quest = new Quest(questName, [], _questsGenerated++);
         }
 
         quest.date = questDate;
